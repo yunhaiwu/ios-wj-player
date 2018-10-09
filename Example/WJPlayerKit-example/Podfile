@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/yunhaiwu/ios-wj-framework-cocoapods-specs.git'
+
+platform :ios, '8.0'
+
+#use_frameworks!
+
+inhibit_all_warnings!
+
+target :'WJPlayerKit-example' do
+pod 'KVOController', '1.1.0'
+#pod 'VIMediaCache'
+pod 'ReactiveObjC', '3.1.0'
+pod 'SDWebImage/Core', '4.4.2'
+#pod 'Reachability', '3.2'
+
+
+end
