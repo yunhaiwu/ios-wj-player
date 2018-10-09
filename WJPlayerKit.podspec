@@ -18,15 +18,13 @@ s.platform     = :ios, "7.0"
 
 s.source       = { :git => "https://github.com/yunhaiwu/ios-wj-framework-cocoapods-specs.git", :tag => "#{s.version}" }
 
-s.frameworks = "Foundation", "UIKit", "AVFoundation"
 s.exclude_files = "Example"
+
+s.source_files = 'Classes/*.{h,m}'
+s.public_header_files = 'Classes/*.h'
 
 s.requires_arc = true
 
-
-s.subspec 'Core' do |core|
-    core.source_files = 'Classes/*.{h,m}'
-    core.public_header_files = 'Classes/*.h'
-end
+s.frameworks = "Foundation", "UIKit", "AVFoundation"
 
 end
