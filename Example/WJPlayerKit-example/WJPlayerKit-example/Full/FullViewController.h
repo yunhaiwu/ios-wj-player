@@ -7,8 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "WJPlayerView.h"
 
 //全屏
 @interface FullViewController : BaseViewController
+
+-(void)fillPlayerView:(UIView<IWJPlayer>*)playerView ;
 
 @end

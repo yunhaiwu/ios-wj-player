@@ -261,7 +261,7 @@ static NSDictionary *playerItemObserveOptions;
 
 /************************************************************************
  ************************************************************************/
--(void)setMediaData:(id<IWJMedia>)media {
+-(void)setMedia:(id<IWJMedia>)media {
     if (_mediaData && [_mediaData.mediaURL.absoluteString isEqualToString:media.mediaURL.absoluteString]) return;
     [self cleanPlayer];
     [self willChangeValueForKey:@"mediaData"];

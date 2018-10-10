@@ -22,22 +22,23 @@
 -(void)setPlayer:(id<IWJPlayer>)player {
     if (_player == player) return;
     _player = player;
-    
-    @weakify(self)
-    [self.KVOController observe:_player keyPath:@"status" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
-        @strongify(self)
-        if (self.player.status == WJPlayerStatusPlaying) {
-            [self.button setTitle:@"暂停" forState:UIControlStateNormal];
-            [self.loadingView stopAnimating];
-            [self.loadingView setHidden:YES];
-        } else {
-            [self.button setTitle:@"播放" forState:UIControlStateNormal];
-        }
-        if (self.player.status == WJPlayerStatusLoading) {
-            [self.loadingView setHidden:NO];
-            [self.loadingView startAnimating];
-        }
-    }];
+    if (_player) {
+        @weakify(self)
+        [self.KVOController observe:_player keyPath:@"status" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+            @strongify(self)
+            if (self.player.status == WJPlayerStatusPlaying) {
+                [self.button setTitle:@"暂停" forState:UIControlStateNormal];
+                [self.loadingView stopAnimating];
+                [self.loadingView setHidden:YES];
+            } else {
+                [self.button setTitle:@"播放" forState:UIControlStateNormal];
+            }
+            if (self.player.status == WJPlayerStatusLoading) {
+                [self.loadingView setHidden:NO];
+                [self.loadingView startAnimating];
+            }
+        }];
+    }
 }
 
 -(void)layoutSubviews {

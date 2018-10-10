@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger, WJPlayerStatus) {
 /**
  媒体数据
  */
-- (void)setMediaData:(id<IWJMedia>)media;
+- (void)setMedia:(id<IWJMedia>)media;
 
 /**
  播放

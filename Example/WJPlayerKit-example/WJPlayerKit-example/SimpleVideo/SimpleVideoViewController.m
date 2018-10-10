@@ -35,7 +35,7 @@
         SimpleVideoControlView *controlView = [SimpleVideoControlView instance];
         WJPlayerView *p = [[WJPlayerView alloc] initWithControlView:controlView];
         [p setBackgroundColor:[UIColor blackColor]];
-        [p playMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/review/15244807024027823.mp4" posterUrl:nil] autoPlay:YES];
+        [p setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/review/15244807024027823.mp4" posterUrl:nil] autoPlay:YES];
         [self.view addSubview:p];
         [p setFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*9/16.0f)];
         [p setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];

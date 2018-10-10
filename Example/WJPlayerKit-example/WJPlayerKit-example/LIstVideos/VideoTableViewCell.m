@@ -29,7 +29,7 @@
 -(void)setData:(SimpleVideoMedia *)data {
     if (_data == data) return;
     _data = data;
-    [_playerView playMedia:data autoPlay:NO];
+    [_playerView setMedia:data autoPlay:NO];
 }
 
 -(void)layoutSubviews {

@@ -8,6 +8,7 @@
 
 #import "SimpleVideoControlView.h"
 #import "KVOController.h"
+#import "ReactiveObjC.h"
 
 @interface SimpleVideoControlView()
 
@@ -61,6 +62,7 @@
 -(void)setPlayer:(id<IWJPlayer>)player {
     if (_player == player || player == nil) return;
     _player = player;
+    
     //添加观察者
     [self.KVOController observe:_player keyPaths:@[@"status",@"duration",@"currentPlayTime",@"loadedTime"] options:NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         int duration = [self.player duration];

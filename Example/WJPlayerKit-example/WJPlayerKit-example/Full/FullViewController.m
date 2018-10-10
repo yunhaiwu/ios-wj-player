@@ -25,7 +25,6 @@
     }];
     [self.view addGestureRecognizer:doubleTap];
     [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
-    
 }
 
 -(BOOL)shouldAutorotate {

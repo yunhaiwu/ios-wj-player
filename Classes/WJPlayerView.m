@@ -36,31 +36,8 @@
             [self addSubview:player];
         }
         _player = player;
+        [_controlView setPlayer:_player];
     }
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self loadSubviews];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self loadSubviews];
-    }
-    return self;
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self loadSubviews];
-    }
-    return self;
 }
 
 -(instancetype)initWithControlView:(UIView<IWJPlayerControlView> *)controlView {
@@ -108,12 +85,41 @@
     }
 }
 
--(void)playMedia:(id<IWJMedia>)media autoPlay:(BOOL)autoPlay {
+- (void)replacePlayer:(UIView<IWJPlayer>*)player {
+    if (_player == player || !player) return;
+    if (_player) {
+        [_controlView setPlayer:nil];
+        [_player removeFromSuperview];
+        _player = nil;
+    }
+    if ([self.subviews count] > 0) {
+        [self insertSubview:player atIndex:1];
+    } else {
+        [self addSubview:player];
+    }
+    _player = player;
+    [player setFrame:self.bounds];
+    [_controlView setPlayer:_player];
+}
+
+-(UIView<IWJPlayer> *)fetchPlayerAndRemoveFromSuperview {
+    if (_player) {
+        [_controlView setPlayer:nil];
+        UIView<IWJPlayer> *player = _player;
+        [_player removeFromSuperview];
+        _player = nil;
+        return player;
+    }
+    return nil;
+}
+
+-(void)setMedia:(id<IWJMedia>)media autoPlay:(BOOL)autoPlay {
+    [self loadSubviews];
     if (_media == media) return;
     _media = media;
     [self.posterView setMedia:media];
-    [self.player setMediaData:media];
-    if (autoPlay) [self.player play];
+    [self.player setMedia:media];
+    if (autoPlay) [self play];
 }
 
 -(void)play {

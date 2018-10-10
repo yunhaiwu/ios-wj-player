@@ -33,15 +33,10 @@
         [self.posterImgView setImage:nil];
         [self.gaussianBlurImgView setImage:nil];
         
-        
-//        @weakify(self)
-//        [[TaskScheduler sharedInstance] perform:^{
-//            @strongify(self)
-            [self.posterImgView sd_setImageWithURL:[self.media posterURL] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                [self.posterImgView setImage:image];
-                [self.gaussianBlurImgView setImage:image];
-            }];
-//        } owner:self];
+        [self.posterImgView sd_setImageWithURL:[self.media posterURL] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [self.posterImgView setImage:image];
+            [self.gaussianBlurImgView setImage:image];
+        }];
     } else {
         [_posterImgView setImage:nil];
         [_gaussianBlurImgView setImage:nil];
@@ -50,18 +45,18 @@
 
 - (void)loadSubviews {
     if (!_posterImgView) {
-//        UIImageView *gaussianBlurBg = [[UIImageView alloc] initWithFrame:self.bounds];
-//        [self addSubview:gaussianBlurBg];
-//        [gaussianBlurBg setClipsToBounds:YES];
-//        [gaussianBlurBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-//        [gaussianBlurBg setContentMode:UIViewContentModeScaleAspectFill];
-//        _gaussianBlurImgView = gaussianBlurBg;
-//
-//        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-//        UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-//        [effectview setFrame:gaussianBlurBg.bounds];
-//        [gaussianBlurBg addSubview:effectview];
-//        [effectview setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        UIImageView *gaussianBlurBg = [[UIImageView alloc] initWithFrame:self.bounds];
+        [self addSubview:gaussianBlurBg];
+        [gaussianBlurBg setClipsToBounds:YES];
+        [gaussianBlurBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [gaussianBlurBg setContentMode:UIViewContentModeScaleAspectFill];
+        _gaussianBlurImgView = gaussianBlurBg;
+
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+        [effectview setFrame:gaussianBlurBg.bounds];
+        [gaussianBlurBg addSubview:effectview];
+        [effectview setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         
         UIImageView *poster = [[UIImageView alloc] initWithFrame:self.bounds];
         [self addSubview:poster];
