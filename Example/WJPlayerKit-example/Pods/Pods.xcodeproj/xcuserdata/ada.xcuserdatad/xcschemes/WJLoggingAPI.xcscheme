@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F782C78A93D25305BECD192886325F1"
-               BlueprintName = "SDWebImage"
+               BlueprintIdentifier = "EAF81329C7EDA9B16F591F13ACE5A9F2"
+               BlueprintName = "WJLoggingAPI"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libSDWebImage.a">
+               BuildableName = "libWJLoggingAPI.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

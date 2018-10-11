@@ -27,4 +27,6 @@ s.requires_arc = true
 
 s.frameworks = "Foundation", "UIKit", "AVFoundation"
 
+s.dependency "WJLoggingAPI"
+
 end

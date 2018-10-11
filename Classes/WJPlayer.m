@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "WJPlayerContext.h"
 #import "WJMediaCacheFactory.h"
+#import "WJLoggingAPI.h"
 
 @interface WJPlayer()
 
@@ -82,6 +83,7 @@ static NSDictionary *playerItemObserveOptions;
 
 #pragma mark play finish notification
 -(void)handlePlayerDidFinishPlayingNotification:(NSNotification*)notification {
+    WJLogDebug(@"\n play finish notification :%@",_mediaData.mediaURL.absoluteString);
     WJ_PLAYER_CONTEXT_TIME_SET([[_mediaData mediaURL] absoluteString], 0);
     [self changeStatus:WJPlayerStatusCompleted];
 }
@@ -224,6 +226,7 @@ static NSDictionary *playerItemObserveOptions;
 }
 
 -(void)cleanPlayer {
+    WJLogDebug(@"\n clean player:%@",[_mediaData mediaURL].absoluteString);
     [self pause];
     [self removeObservers];
     if (_playerLayer) [_playerLayer removeFromSuperlayer];
@@ -242,6 +245,7 @@ static NSDictionary *playerItemObserveOptions;
 
 -(void)loadPlayer:(NSURL*)url {
     if (!url) return;
+    WJLogDebug(@"\n load player:%@",url.absoluteString);
     self.playerItem = [[WJMediaCacheFactory getMediaCache] getPlayerItem:url];
     self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
     //视频媒体需要添加到当前视图层上
@@ -265,6 +269,7 @@ static NSDictionary *playerItemObserveOptions;
  ************************************************************************/
 -(void)setMedia:(id<IWJMedia>)media {
     if (_mediaData && [_mediaData.mediaURL.absoluteString isEqualToString:media.mediaURL.absoluteString]) return;
+    WJLogDebug(@"\n set media :%@",media.mediaURL.absoluteString);
     [self cleanPlayer];
     [self willChangeValueForKey:@"mediaData"];
     _mediaData = media;
@@ -273,6 +278,7 @@ static NSDictionary *playerItemObserveOptions;
 
 -(void)play {
     if (!self.mediaData) return;
+    WJLogDebug(@"\n play :%@",_mediaData.mediaURL.absoluteString);
     //清理播放器
     WJPlayer *previousPlayer = (WJPlayer*)WJ_PLAYER_CONTEXT_CURRENT_PLAYER_GET;
     if (previousPlayer != self) {
@@ -298,12 +304,14 @@ static NSDictionary *playerItemObserveOptions;
 
 -(void)pause {
     if (!self.player) return;
+    WJLogDebug(@"\n pause :%@",_mediaData.mediaURL.absoluteString);
     [self.player pause];
     [self.playerItem cancelPendingSeeks];
 }
 
 -(void)replay {
     if (!self.player) return;
+    WJLogDebug(@"\n replay url:%@",_mediaData.mediaURL.absoluteString);
     [self pause];
     WJ_PLAYER_CONTEXT_TIME_SET(_mediaData.mediaURL.absoluteString, 0);
     [self seekToTime:0];
@@ -312,6 +320,7 @@ static NSDictionary *playerItemObserveOptions;
 
 -(void)seekToTime:(int)t {
     if (!self.player) return;
+    WJLogDebug(@"\n replay t:%i url:%@",t,_mediaData.mediaURL.absoluteString);
     if (self.player.status != AVPlayerStatusUnknown) {
         WJ_PLAYER_CONTEXT_TIME_SET(_mediaData.mediaURL.absoluteString, t);
         CMTime time = CMTimeMake(t, 1);

@@ -2,23 +2,28 @@ PODS:
   - KVOController (1.1.0)
   - ReactiveObjC (3.1.0)
   - SDWebImage/Core (4.4.2)
+  - WJLoggingAPI (2.0)
 
 DEPENDENCIES:
   - KVOController (= 1.1.0)
   - ReactiveObjC (= 3.1.0)
   - SDWebImage/Core (= 4.4.2)
+  - WJLoggingAPI
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - KVOController
     - ReactiveObjC
     - SDWebImage
+  https://github.com/yunhaiwu/ios-wj-framework-cocoapods-specs.git:
+    - WJLoggingAPI
 
 SPEC CHECKSUMS:
   KVOController: 321b5fc59300fcaabd42c0f679baa7a27efbb2fd
   ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  WJLoggingAPI: 183581a351d51f93ec9900a3cc5f2df15b907de3
 
-PODFILE CHECKSUM: 0ea9f2e3cb46187b53acd70eedfb96acf8738a73
+PODFILE CHECKSUM: 6b921d7677b2f3b9135e145f2be16e9d5b1204f8
 
 COCOAPODS: 1.5.3
