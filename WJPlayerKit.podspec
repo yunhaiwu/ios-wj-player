@@ -16,7 +16,7 @@ s.author             = { "吴云海" => "halayun@qq.com" }
 
 s.platform     = :ios, "7.0"
 
-s.source       = { :git => "https://github.com/yunhaiwu/ios-wj-framework-cocoapods-specs.git", :tag => "#{s.version}" }
+s.source       = { :git => "https://github.com/yunhaiwu/ios-wj-player.git", :tag => "#{s.version}" }
 
 s.exclude_files = "Example"
 
