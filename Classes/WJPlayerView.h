@@ -45,12 +45,6 @@
  */
 - (void)replacePosterView:(UIView<IWJPlayerPosterView>*)posterView;
 
-
-/**
- 替换播放视图
- */
-- (void)replacePlayer:(UIView<IWJPlayer>*)player;
-
 /**
  初始化方法
  */
@@ -78,13 +72,5 @@
  暂停
  */
 -(void)pause;
-
-/**
- 获取并从当前父视图移除
- */
--(UIView<IWJPlayer>*)fetchPlayerAndRemoveFromSuperview;
-
-
-
 
 @end

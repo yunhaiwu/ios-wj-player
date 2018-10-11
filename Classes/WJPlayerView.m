@@ -89,36 +89,7 @@
     }
 }
 
-- (void)replacePlayer:(UIView<IWJPlayer>*)player {
-    if (_player == player || !player) return;
-    if (_player) {
-        [_controlView setPlayer:nil];
-        [_player removeFromSuperview];
-        _player = nil;
-    }
-    if ([self.subviews count] > 0) {
-        [self insertSubview:player atIndex:1];
-    } else {
-        [self addSubview:player];
-    }
-    _player = player;
-    [player setFrame:self.bounds];
-    [_controlView setPlayer:_player];
-}
-
--(UIView<IWJPlayer> *)fetchPlayerAndRemoveFromSuperview {
-    if (_player) {
-        [_controlView setPlayer:nil];
-        UIView<IWJPlayer> *player = _player;
-        [_player removeFromSuperview];
-        _player = nil;
-        return player;
-    }
-    return nil;
-}
-
 -(void)setMedia:(id<IWJMedia>)media autoPlay:(BOOL)autoPlay {
-    [self loadSubviews];
     if (_media == media) return;
     _media = media;
     [self.posterView setMedia:media];
