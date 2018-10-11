@@ -58,7 +58,11 @@
             [self addSubview:pv];
             [cv setDelegate:self];
             [pv replaceControlView:cv];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+#pragma clang diagnostic pop
+            
         }];
     }
 }
