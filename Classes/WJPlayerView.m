@@ -18,7 +18,7 @@
 @implementation WJPlayerView
 
 
-#pragma mark init、dealloc、layout
+#pragma mark init、layout
 
 - (void)layoutSubviews {
     [super layoutSubviews];

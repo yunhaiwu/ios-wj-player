@@ -68,7 +68,9 @@
     [self.KVOController unobserveAll];
     _player = player;
     //添加观察者
+    @weakify(self)
     [self.KVOController observe:_player keyPaths:@[@"status",@"duration",@"currentPlayTime",@"loadedTime"] options:NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        @strongify(self)
         int duration = [self.player duration];
         int currentTime = [self.player currentPlayTime];
         
@@ -110,6 +112,10 @@
         instance = [[self alloc] init];
     }
     return instance;
+}
+
+-(void)dealloc {
+    NSLog(@"%@ dealloc ...",NSStringFromClass(self.class));
 }
 
 @end

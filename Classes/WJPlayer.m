@@ -69,7 +69,6 @@ static NSDictionary *playerItemObserveOptions;
 
 -(void)dealloc {
     [self cleanPlayer];
-    NSLog(@"%@ dealloc ...", NSStringFromClass(self.class));
 }
 
 -(void)layoutSubviews {
