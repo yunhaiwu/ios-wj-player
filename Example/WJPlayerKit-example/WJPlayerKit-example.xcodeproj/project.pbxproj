@@ -24,7 +24,6 @@
 		60A1E8C6216CA1C3002F2638 /* FullPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8C0216CA1C3002F2638 /* FullPlayerControlView.m */; };
 		60A1E8C7216CA1C3002F2638 /* SimplePlayerPosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8C1216CA1C3002F2638 /* SimplePlayerPosterView.m */; };
 		60A1E8C8216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8C4216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m */; };
-		60A1E8DD216CA21D002F2638 /* FullViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8CA216CA21C002F2638 /* FullViewController.m */; };
 		60A1E8DE216CA21D002F2638 /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8CE216CA21C002F2638 /* VideoTableViewCell.m */; };
 		60A1E8DF216CA21D002F2638 /* ListVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8CF216CA21C002F2638 /* ListVideoViewController.m */; };
 		60A1E8E0216CA21D002F2638 /* AudioPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8D2216CA21C002F2638 /* AudioPlayViewController.m */; };
@@ -36,6 +35,9 @@
 		60A1E8EC216CA33A002F2638 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8E8216CA339002F2638 /* BaseTableViewController.m */; };
 		60A1E8ED216CA33A002F2638 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8E9216CA33A002F2638 /* BaseNavigationViewController.m */; };
 		60A1E8F2216CB032002F2638 /* BaseControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8F1216CB032002F2638 /* BaseControlView.m */; };
+		60C89536216EF50D00E5AA1A /* FullVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C89535216EF50D00E5AA1A /* FullVideoControlView.m */; };
+		60C89538216EF60E00E5AA1A /* FullVideoControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */; };
+		60C8953B216EF8B100E5AA1A /* SimpleVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8953A216EF8B100E5AA1A /* SimpleVideoPlayView.m */; };
 		F82FF93DED1782874376CFF4 /* libPods-WJPlayerKit-example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15803346880EFF8752DC92B6 /* libPods-WJPlayerKit-example.a */; };
 /* End PBXBuildFile section */
 
@@ -91,8 +93,6 @@
 		60A1E8C2216CA1C3002F2638 /* FullPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullPlayerControlView.h; sourceTree = "<group>"; };
 		60A1E8C3216CA1C3002F2638 /* GaussianBlurPlayerPosterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaussianBlurPlayerPosterView.h; sourceTree = "<group>"; };
 		60A1E8C4216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GaussianBlurPlayerPosterView.m; sourceTree = "<group>"; };
-		60A1E8CA216CA21C002F2638 /* FullViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullViewController.m; sourceTree = "<group>"; };
-		60A1E8CB216CA21C002F2638 /* FullViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullViewController.h; sourceTree = "<group>"; };
 		60A1E8CD216CA21C002F2638 /* ListVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListVideoViewController.h; sourceTree = "<group>"; };
 		60A1E8CE216CA21C002F2638 /* VideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTableViewCell.m; sourceTree = "<group>"; };
 		60A1E8CF216CA21C002F2638 /* ListVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListVideoViewController.m; sourceTree = "<group>"; };
@@ -115,6 +115,11 @@
 		60A1E8EE216CABC2002F2638 /* WJPlayerKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = WJPlayerKit.podspec; path = ../../WJPlayerKit.podspec; sourceTree = "<group>"; };
 		60A1E8F0216CB032002F2638 /* BaseControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseControlView.h; sourceTree = "<group>"; };
 		60A1E8F1216CB032002F2638 /* BaseControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseControlView.m; sourceTree = "<group>"; };
+		60C89534216EF50D00E5AA1A /* FullVideoControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullVideoControlView.h; sourceTree = "<group>"; };
+		60C89535216EF50D00E5AA1A /* FullVideoControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullVideoControlView.m; sourceTree = "<group>"; };
+		60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullVideoControlView.xib; sourceTree = "<group>"; };
+		60C89539216EF8B100E5AA1A /* SimpleVideoPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleVideoPlayView.h; sourceTree = "<group>"; };
+		60C8953A216EF8B100E5AA1A /* SimpleVideoPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleVideoPlayView.m; sourceTree = "<group>"; };
 		6ED7B9733936C863CE313E02 /* Pods-WJPlayerKit-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WJPlayerKit-example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WJPlayerKit-example/Pods-WJPlayerKit-example.debug.xcconfig"; sourceTree = "<group>"; };
 		70490A5115134B4C55FA73D7 /* Pods-WJPlayerKit-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WJPlayerKit-example.release.xcconfig"; path = "Pods/Target Support Files/Pods-WJPlayerKit-example/Pods-WJPlayerKit-example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				60A1E8D1216CA21C002F2638 /* Audio */,
-				60A1E8C9216CA21C002F2638 /* Full */,
 				60A1E8CC216CA21C002F2638 /* LIstVideos */,
 				60A1E8D4216CA21D002F2638 /* Root */,
 				60A1E8D7216CA21D002F2638 /* SimpleVideo */,
@@ -245,15 +249,6 @@
 			path = PosterViews;
 			sourceTree = "<group>";
 		};
-		60A1E8C9216CA21C002F2638 /* Full */ = {
-			isa = PBXGroup;
-			children = (
-				60A1E8CB216CA21C002F2638 /* FullViewController.h */,
-				60A1E8CA216CA21C002F2638 /* FullViewController.m */,
-			);
-			path = Full;
-			sourceTree = "<group>";
-		};
 		60A1E8CC216CA21C002F2638 /* LIstVideos */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +286,11 @@
 				60A1E8D9216CA21D002F2638 /* SimpleVideoControlView.xib */,
 				60A1E8DA216CA21D002F2638 /* SimpleVideoViewController.h */,
 				60A1E8DC216CA21D002F2638 /* SimpleVideoViewController.m */,
+				60C89534216EF50D00E5AA1A /* FullVideoControlView.h */,
+				60C89535216EF50D00E5AA1A /* FullVideoControlView.m */,
+				60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */,
+				60C89539216EF8B100E5AA1A /* SimpleVideoPlayView.h */,
+				60C8953A216EF8B100E5AA1A /* SimpleVideoPlayView.m */,
 			);
 			path = SimpleVideo;
 			sourceTree = "<group>";
@@ -397,6 +397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C89538216EF60E00E5AA1A /* FullVideoControlView.xib in Resources */,
 				60A1E8E2216CA21D002F2638 /* SimpleVideoControlView.xib in Resources */,
 				60A1E888216CA113002F2638 /* LaunchScreen.storyboard in Resources */,
 				60A1E885216CA113002F2638 /* Assets.xcassets in Resources */,
@@ -443,8 +444,8 @@
 				60A1E8E1216CA21D002F2638 /* RootViewController.m in Sources */,
 				60A1E8E4216CA21D002F2638 /* SimpleVideoViewController.m in Sources */,
 				60A1E8C6216CA1C3002F2638 /* FullPlayerControlView.m in Sources */,
+				60C8953B216EF8B100E5AA1A /* SimpleVideoPlayView.m in Sources */,
 				60A1E8B9216CA17A002F2638 /* SimpleVideoMedia.m in Sources */,
-				60A1E8DD216CA21D002F2638 /* FullViewController.m in Sources */,
 				60A1E8EC216CA33A002F2638 /* BaseTableViewController.m in Sources */,
 				60A1E8E0216CA21D002F2638 /* AudioPlayViewController.m in Sources */,
 				60A1E8BA216CA17A002F2638 /* SimpleAudioMedia.m in Sources */,
@@ -452,6 +453,7 @@
 				60A1E8C8216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m in Sources */,
 				60A1E8F2216CB032002F2638 /* BaseControlView.m in Sources */,
 				60A1E8ED216CA33A002F2638 /* BaseNavigationViewController.m in Sources */,
+				60C89536216EF50D00E5AA1A /* FullVideoControlView.m in Sources */,
 				60A1E8C5216CA1C3002F2638 /* SimplePlayerControlView.m in Sources */,
 				60A1E8DF216CA21D002F2638 /* ListVideoViewController.m in Sources */,
 				60A1E8E3216CA21D002F2638 /* SimpleVideoControlView.m in Sources */,
@@ -624,6 +626,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5D39YL5D57;
 				INFOPLIST_FILE = "WJPlayerKit-example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -642,6 +645,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5D39YL5D57;
 				INFOPLIST_FILE = "WJPlayerKit-example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

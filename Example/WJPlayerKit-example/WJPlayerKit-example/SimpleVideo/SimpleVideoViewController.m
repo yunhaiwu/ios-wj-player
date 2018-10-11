@@ -10,47 +10,42 @@
 #import "SimpleVideoControlView.h"
 #import "WJPlayerView.h"
 #import "SimpleVideoMedia.h"
-#import "FullViewController.h"
+#import "SimpleVideoPlayView.h"
 
 @interface SimpleVideoViewController ()
 
-@property(nonatomic, weak) SimpleVideoControlView *controlView;
-
-@property(nonatomic, weak) WJPlayerView *playerView;
+@property(nonatomic, weak) SimpleVideoPlayView *simpleVideoPlayView;
 
 @end
 
 @implementation SimpleVideoViewController
 
--(void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.playerView pause];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Simple Video";
     
-    if (!_playerView) {
-        SimpleVideoControlView *controlView = [SimpleVideoControlView instance];
-        WJPlayerView *p = [[WJPlayerView alloc] initWithControlView:controlView];
-        [p setBackgroundColor:[UIColor blackColor]];
-        [p setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/review/15244807024027823.mp4" posterUrl:nil] autoPlay:YES];
-        [self.view addSubview:p];
-        [p setFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*9/16.0f)];
-        [p setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
-        [self.view addSubview:p];
-        _playerView = p;
+    if (!_simpleVideoPlayView) {
+        SimpleVideoPlayView *v = [[SimpleVideoPlayView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*9/16.0f)];
+        [self.view addSubview:v];
+        [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+        _simpleVideoPlayView = v;
+        [v.playerView setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/review/15244807024027823.mp4" posterUrl:nil] autoPlay:YES];
     }
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全屏" style:UIBarButtonItemStyleDone target:self action:@selector(rightExec:)];
 }
 
--(void)rightExec:(id)sender {
-    //进入全屏
-    FullViewController *vc = [[FullViewController alloc] init];
-    [self.navigationController presentViewController:vc animated:NO completion:NULL];
+
+-(BOOL)shouldAutorotate {
+    return NO;
 }
 
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
 
 @end

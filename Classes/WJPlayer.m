@@ -74,7 +74,10 @@ static NSDictionary *playerItemObserveOptions;
 
 -(void)layoutSubviews {
     [super layoutSubviews];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
     [self.playerLayer setFrame:self.bounds];
+    [CATransaction commit];
 }
 
 

@@ -22,9 +22,12 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
     [_player setFrame:self.bounds];
     [_posterView setFrame:self.bounds];
     [_controlView setFrame:self.bounds];
+    [CATransaction commit];
 }
 
 - (void)loadSubviews {
@@ -38,6 +41,7 @@
         _player = player;
         [_controlView setPlayer:_player];
     }
+    [self setBackgroundColor:[UIColor blackColor]];
 }
 
 -(instancetype)initWithControlView:(UIView<IWJPlayerControlView> *)controlView {

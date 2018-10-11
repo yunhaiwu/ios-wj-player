@@ -1,16 +1,16 @@
 //
-//  SimpleVideoControlView.m
-//  WJPlayer
+//  FullVideoControlView.m
+//  WJPlayerKit-example
 //
-//  Created by Yunhai.Wu on 2018/9/9.
+//  Created by ada on 2018/10/11.
 //  Copyright © 2018年 PN. All rights reserved.
 //
 
-#import "SimpleVideoControlView.h"
+#import "FullVideoControlView.h"
 #import "KVOController.h"
 #import "ReactiveObjC.h"
 
-@interface SimpleVideoControlView()
+@interface FullVideoControlView()
 
 @property(nonatomic, weak) IBOutlet UISlider *slider;
 
@@ -24,13 +24,15 @@
 -(IBAction)btnExec:(id)sender;
 
 -(IBAction)replayExec:(id)sender;
--(IBAction)fullScreenExec:(id)sender;
+-(IBAction)exitFullScreenExec:(id)sender;
 @end
 
-@implementation SimpleVideoControlView
 
--(void)fullScreenExec:(id)sender {
-    [_delegate simpleVideoControlViewDidFullScreen:self];
+
+@implementation FullVideoControlView
+
+-(void)exitFullScreenExec:(id)sender {
+    [_delegate fullVideoControlViewDidQuitFullScreen:self];
 }
 
 -(void)sliderTouchUpInside:(id)sender {
@@ -92,7 +94,7 @@
 }
 
 +(instancetype)instance {
-    SimpleVideoControlView *instance = nil;
+    FullVideoControlView *instance = nil;
     @try {
         NSString *className = NSStringFromClass(self);
         NSString *nibFile = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.nib",className]];
