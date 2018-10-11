@@ -20,6 +20,10 @@
 
 @implementation SimpleVideoViewController
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[_simpleVideoPlayView playerView] pause];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

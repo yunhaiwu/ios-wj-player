@@ -67,7 +67,6 @@
     if (_player == player || player == nil) return;
     [self.KVOController unobserveAll];
     _player = player;
-    
     //添加观察者
     [self.KVOController observe:_player keyPaths:@[@"status",@"duration",@"currentPlayTime",@"loadedTime"] options:NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
         int duration = [self.player duration];
@@ -78,11 +77,9 @@
         if (self.player.status == WJPlayerStatusPlaying) {
             [self.btn setTitle:@"暂停" forState:UIControlStateNormal];
             [self.btn setHidden:NO];
-        } else if (self.player.status == WJPlayerStatusPaused) {
+        } else {
             [self.btn setTitle:@"播放" forState:UIControlStateNormal];
             [self.btn setHidden:NO];
-        } else {
-            [self.btn setHidden:YES];
         }
         if (![self.slider isTracking]) {
             float f = currentTime / (float)duration;

@@ -7,10 +7,12 @@
 //
 
 #import "VideoTableViewCell.h"
-#import "GaussianBlurPlayerPosterView.h"
-#import "SimplePlayerControlView.h"
+#import "SimpleVideoPlayView.h"
+
 
 @interface VideoTableViewCell ()
+
+@property(nonatomic, weak) SimpleVideoPlayView *simpleVideoPlayView;
 
 @end
 
@@ -29,20 +31,20 @@
 -(void)setData:(SimpleVideoMedia *)data {
     if (_data == data) return;
     _data = data;
-    [_playerView setMedia:data autoPlay:NO];
+    [[_simpleVideoPlayView playerView] setMedia:data autoPlay:NO];
 }
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    [_playerView setFrame:self.contentView.bounds];
+    [_simpleVideoPlayView setFrame:self.contentView.bounds];
 }
 
 -(void)loadSubviews {
-    if ([self contentView] && !_playerView) {
-        WJPlayerView *v = [[WJPlayerView alloc] initWithControlView:[[SimplePlayerControlView alloc] init] posterView:[[GaussianBlurPlayerPosterView alloc] init]];
+    if ([self contentView] && !_simpleVideoPlayView) {
+        SimpleVideoPlayView *v = [[SimpleVideoPlayView alloc] initWithFrame:self.contentView.bounds];
         [self.contentView addSubview:v];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        _playerView = v;
+        _simpleVideoPlayView = v;
     }
 }
 

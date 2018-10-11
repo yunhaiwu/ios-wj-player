@@ -14,6 +14,4 @@
 
 @property(nonatomic, strong) SimpleVideoMedia *data;
 
-@property(nonatomic, weak, readonly) WJPlayerView *playerView;
-
 @end

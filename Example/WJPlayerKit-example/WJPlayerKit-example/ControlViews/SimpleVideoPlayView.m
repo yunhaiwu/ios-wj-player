@@ -9,7 +9,7 @@
 #import "SimpleVideoPlayView.h"
 #import "SimpleVideoControlView.h"
 #import "FullVideoControlView.h"
-
+#import "GaussianBlurPlayerPosterView.h"
 
 @interface SimpleVideoPlayView ()<SimpleVideoControlViewDelegate, FullVideoControlViewDelegate>
 
@@ -94,8 +94,9 @@
 -(void)loadSubviews {
     if (!_playerView) {
         SimpleVideoControlView *controlView = [SimpleVideoControlView instance];
+        GaussianBlurPlayerPosterView *posterView = [[GaussianBlurPlayerPosterView alloc] init];
         [controlView setDelegate:self];
-        WJPlayerView *p = [[WJPlayerView alloc] initWithControlView:controlView];
+        WJPlayerView *p = [[WJPlayerView alloc] initWithControlView:controlView posterView:posterView];
         [self addSubview:p];
         [p setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [p setFrame:self.bounds];
