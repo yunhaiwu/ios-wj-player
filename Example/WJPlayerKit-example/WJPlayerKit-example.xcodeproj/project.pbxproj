@@ -117,6 +117,7 @@
 		60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullVideoControlView.xib; sourceTree = "<group>"; };
 		60C89539216EF8B100E5AA1A /* SimpleVideoPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleVideoPlayView.h; sourceTree = "<group>"; };
 		60C8953A216EF8B100E5AA1A /* SimpleVideoPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleVideoPlayView.m; sourceTree = "<group>"; };
+		60C8953C216F4F7C00E5AA1A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		6ED7B9733936C863CE313E02 /* Pods-WJPlayerKit-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WJPlayerKit-example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WJPlayerKit-example/Pods-WJPlayerKit-example.debug.xcconfig"; sourceTree = "<group>"; };
 		70490A5115134B4C55FA73D7 /* Pods-WJPlayerKit-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WJPlayerKit-example.release.xcconfig"; path = "Pods/Target Support Files/Pods-WJPlayerKit-example/Pods-WJPlayerKit-example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +153,7 @@
 		60A1E86F216CA112002F2638 = {
 			isa = PBXGroup;
 			children = (
+				60C8953C216F4F7C00E5AA1A /* README.md */,
 				60A1E8EE216CABC2002F2638 /* WJPlayerKit.podspec */,
 				60A1E89F216CA14E002F2638 /* Classes */,
 				60A1E87A216CA112002F2638 /* WJPlayerKit-example */,
