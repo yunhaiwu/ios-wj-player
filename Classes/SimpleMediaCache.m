@@ -34,7 +34,7 @@
  处理内存警告通知
  */
 -(void)handleApplicationDidReceiveMemoryWarningNotification:(NSNotification*)notification {
-    [self.assetsCache removeAllObjects];
+    [self cleanAllCache];
 }
 
 -(void)dealloc {
@@ -63,5 +63,18 @@
 }
 
 -(void)cancelLoading:(NSURL *)url {}
+
+
+-(void)cleanAllCache {
+    [_assetsCache removeAllObjects];
+}
+
+-(void)cleanCacheWithURL:(NSURL *)url {
+    if (url) [_assetsCache removeObjectForKey:url.absoluteString];
+}
+
+-(unsigned long long)cachedSize {
+    return 0;
+}
 
 @end

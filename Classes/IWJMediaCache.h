@@ -25,5 +25,19 @@
  */
 -(void)cancelLoading:(NSURL*)url;
 
+/**
+ 已缓存数据大小
+ */
+-(unsigned long long)cachedSize;
+
+/**
+ 清空所有缓存
+ */
+- (void)cleanAllCache;
+
+/**
+ 清空指定缓存
+ */
+- (void)cleanCacheWithURL:(NSURL*)url;
 
 @end
