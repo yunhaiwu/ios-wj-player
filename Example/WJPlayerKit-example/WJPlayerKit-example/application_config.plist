@@ -6,6 +6,8 @@
 	<dict>
 		<key>askPlayControlView</key>
 		<string>Default4GAskControlView</string>
+		<key>playProgressCacheCount</key>
+		<integer>100</integer>
 	</dict>
 </dict>
 </plist>
