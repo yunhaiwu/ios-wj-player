@@ -7,6 +7,7 @@
 //
 
 #import "WJPlayerContext.h"
+#import "WJConfig.h"
 
 @interface WJPlayerContext()
 
@@ -20,7 +21,17 @@
     self = [super init];
     if (self) {
         self.timesCache = [[NSCache alloc] init];
-        [self.timesCache setCountLimit:200];
+        NSDictionary *config = [WJConfig objectForKey:@"WJPlayerKit"];
+        if (config && [config[@"playProgressCacheCount"] isKindOfClass:[NSNumber class]]) {
+            NSInteger count = [config[@"playProgressCacheCount"] integerValue];
+            if (count > 0) {
+                [self.timesCache setCountLimit:(count > 200 ? 200 : count)];
+            } else {
+                self.timesCache  = nil;
+            }
+        } else {
+            [self.timesCache setCountLimit:2];
+        }
     }
     return self;
 }

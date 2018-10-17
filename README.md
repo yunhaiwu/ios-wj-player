@@ -28,10 +28,12 @@ SimpleVideoMedia *media = [[SimpleVideoMedia alloc] initWithVideoUrl:@"https://v
 
 WJPlayerKit:
     {
-        "askPlayControlView":""
+        "askPlayControlView":(String)配置流量播放时询问视图类名
+        "playProgressCacheCount":(Number)缓存播放进度个数（默认为2，如果<=0不缓存，最大缓存200）
     }
     
-注意：askPlayControlView需要继承 AbstractAskPlayControlView类
+注意：
+askPlayControlView需要继承 AbstractAskPlayControlView类
 
 ```
 
