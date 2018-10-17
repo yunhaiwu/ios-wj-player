@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EAF81329C7EDA9B16F591F13ACE5A9F2"
+               BlueprintIdentifier = "6D2DC95EA8BB19C14E2B4454B359AB82"
                BlueprintName = "WJLoggingAPI"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libWJLoggingAPI.a">

@@ -9,11 +9,10 @@ inhibit_all_warnings!
 
 target :'WJPlayerKit-example' do
 pod 'KVOController', '1.1.0'
-#pod 'VIMediaCache'
 pod 'ReactiveObjC', '3.1.0'
 pod 'SDWebImage/Core', '4.4.2'
-#pod 'Reachability', '3.2'
+pod 'Reachability'
 pod 'WJLoggingAPI'
-
+pod 'WJConfig', '>=2.0'
 
 end

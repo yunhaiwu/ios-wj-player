@@ -9,10 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "IWJPlayer.h"
 
+@class WJPlayer;
+
+@protocol WJPlayerDelegate <NSObject>
+
+-(void)playerDidAskCellNetworkCanPlay:(WJPlayer*)player;
+
+@end
+
 /**
  视频展示视图
  */
 @interface WJPlayer : UIView<IWJPlayer>
+
+@property(nonatomic, weak) id<WJPlayerDelegate> delegate;
 
 /**
  当前播放状态
@@ -49,5 +59,9 @@
  */
 @property(nonatomic, assign, readonly) CGSize videoSize;
 
+/**
+ WAN网络可以播放视频
+ */
+-(void)cellNetworkCanPlay;
 
 @end

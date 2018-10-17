@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6053F03921772CC700B828E1 /* Default4GAskControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F03821772CC700B828E1 /* Default4GAskControlView.m */; };
+		6053F03D21772D4D00B828E1 /* application_config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6053F03C21772D4D00B828E1 /* application_config.plist */; };
+		6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */; };
 		60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E87C216CA112002F2638 /* AppDelegate.m */; };
 		60A1E883216CA112002F2638 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E881216CA112002F2638 /* Main.storyboard */; };
 		60A1E885216CA113002F2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E884216CA113002F2638 /* Assets.xcassets */; };
@@ -52,6 +55,11 @@
 
 /* Begin PBXFileReference section */
 		15803346880EFF8752DC92B6 /* libPods-WJPlayerKit-example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WJPlayerKit-example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6053F03721772CC700B828E1 /* Default4GAskControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Default4GAskControlView.h; sourceTree = "<group>"; };
+		6053F03821772CC700B828E1 /* Default4GAskControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Default4GAskControlView.m; sourceTree = "<group>"; };
+		6053F03C21772D4D00B828E1 /* application_config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = application_config.plist; sourceTree = "<group>"; };
+		6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractAskPlayControlView.h; sourceTree = "<group>"; };
+		6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractAskPlayControlView.m; sourceTree = "<group>"; };
 		60A1E878216CA112002F2638 /* WJPlayerKit-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WJPlayerKit-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A1E87B216CA112002F2638 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		60A1E87C216CA112002F2638 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -189,6 +197,7 @@
 				60A1E886216CA113002F2638 /* LaunchScreen.storyboard */,
 				60A1E889216CA113002F2638 /* Info.plist */,
 				60A1E88A216CA113002F2638 /* main.m */,
+				6053F03C21772D4D00B828E1 /* application_config.plist */,
 				60A1E8E5216CA339002F2638 /* BaseNavigationViewController.h */,
 				60A1E8E9216CA33A002F2638 /* BaseNavigationViewController.m */,
 				60A1E8E6216CA339002F2638 /* BaseTableViewController.h */,
@@ -217,6 +226,8 @@
 				60A1E8AF216CA17A002F2638 /* IWJPlayer.h */,
 				60A1E8B3216CA17A002F2638 /* IWJPlayerControlView.h */,
 				60A1E8A6216CA179002F2638 /* IWJPlayerPosterView.h */,
+				6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */,
+				6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */,
 				60A1E8A7216CA179002F2638 /* SimpleAudioMedia.h */,
 				60A1E8B1216CA17A002F2638 /* SimpleAudioMedia.m */,
 				60A1E8A5216CA179002F2638 /* SimpleMediaCache.h */,
@@ -301,6 +312,8 @@
 				60A1E8BE216CA1C3002F2638 /* SimplePlayerControlView.m */,
 				60A1E8F0216CB032002F2638 /* BaseControlView.h */,
 				60A1E8F1216CB032002F2638 /* BaseControlView.m */,
+				6053F03721772CC700B828E1 /* Default4GAskControlView.h */,
+				6053F03821772CC700B828E1 /* Default4GAskControlView.m */,
 			);
 			path = ControlViews;
 			sourceTree = "<group>";
@@ -399,6 +412,7 @@
 				60A1E888216CA113002F2638 /* LaunchScreen.storyboard in Resources */,
 				60A1E885216CA113002F2638 /* Assets.xcassets in Resources */,
 				60A1E883216CA112002F2638 /* Main.storyboard in Resources */,
+				6053F03D21772D4D00B828E1 /* application_config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +465,7 @@
 				60A1E8ED216CA33A002F2638 /* BaseNavigationViewController.m in Sources */,
 				60C89536216EF50D00E5AA1A /* FullVideoControlView.m in Sources */,
 				60A1E8C5216CA1C3002F2638 /* SimplePlayerControlView.m in Sources */,
+				6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */,
 				60A1E8DF216CA21D002F2638 /* ListVideoViewController.m in Sources */,
 				60A1E8E3216CA21D002F2638 /* SimpleVideoControlView.m in Sources */,
 				60A1E8DE216CA21D002F2638 /* VideoTableViewCell.m in Sources */,
@@ -461,6 +476,7 @@
 				60A1E8B7216CA17A002F2638 /* WJMediaCacheFactory.m in Sources */,
 				60A1E8EB216CA33A002F2638 /* BaseViewController.m in Sources */,
 				60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */,
+				6053F03921772CC700B828E1 /* Default4GAskControlView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,7 +638,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5D39YL5D57;
 				INFOPLIST_FILE = "WJPlayerKit-example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -641,7 +657,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5D39YL5D57;
 				INFOPLIST_FILE = "WJPlayerKit-example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,18 +8,66 @@
 
 #import "WJPlayerView.h"
 #import "WJPlayer.h"
+#import "AbstractAskPlayControlView.h"
+#import "WJConfig.h"
 
-@interface WJPlayerView()
+@interface WJPlayerView()<WJPlayerDelegate, AskPlayControlViewDelegate>
 
+//媒体数据
 @property(nonatomic, strong) id<IWJMedia> media;
+
+//网络询问控制器
+@property(nonatomic, weak) AbstractAskPlayControlView *askControlView;
+
+/**
+ 当前控制视图
+ 当askControlView == nil 时，currentControlView才不为空有值
+ */
+@property(nonatomic, strong) UIView<IWJPlayerControlView> *currentControlView;
+
 
 @end
 
 @implementation WJPlayerView
 
+#pragma mark AskPlayControlViewDelegate
+-(void)askPlayControlViewDidContinue:(AbstractAskPlayControlView *)controlView {
+    [self replaceControlView:_currentControlView];
+    [(WJPlayer*)_player cellNetworkCanPlay];
+    [self play];
+}
+
+#pragma mark WJPlayerDelegate
+-(void)playerDidAskCellNetworkCanPlay:(WJPlayer *)player {
+    if (!_askControlView) {
+        AbstractAskPlayControlView *v = [self instanceAskPlayControlView];
+        if (v) {
+            //强引用当前控制视图
+            self.currentControlView = _controlView;
+            //替换当前控制视图为询问网络控制视图
+            [v setAskDelegate:self];
+            [self replaceControlView:v];
+            _askControlView = v;
+        } else {
+            [(WJPlayer*)_player cellNetworkCanPlay];
+            [self play];
+        }
+    }
+}
+
+-(AbstractAskPlayControlView*)instanceAskPlayControlView {
+    NSDictionary *dict = [WJConfig dictionaryForKey:@"WJPlayerKit"];
+    NSString *askPlayControlViewClazzName = dict[@"askPlayControlView"];
+    if (askPlayControlViewClazzName) {
+        Class clazz = NSClassFromString(askPlayControlViewClazzName);
+        if (clazz && [clazz isSubclassOfClass:[AbstractAskPlayControlView class]]) {
+            return [[clazz alloc] init];
+        }
+    }
+    return nil;
+}
 
 #pragma mark init、layout
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     [CATransaction begin];
@@ -38,6 +86,7 @@
         } else {
             [self addSubview:player];
         }
+        [player setDelegate:self];
         _player = player;
         [_controlView setPlayer:_player];
     }
@@ -64,9 +113,15 @@
 }
 
 #pragma mark features
-
 - (void)replaceControlView:(UIView<IWJPlayerControlView> *)controlView {
-    if (_controlView) {
+    
+    if ([_askControlView superview]) {
+        self.currentControlView = nil;
+        [_askControlView removeFromSuperview];
+        _askControlView = nil;
+    }
+    
+    if ([_controlView superview]) {
         [_controlView removeFromSuperview];
     }
     if (controlView) {

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "WJPlayerKit"
-s.version      = "1.0"
+s.version      = "1.0.1"
 s.summary      = "播放器开发包."
 
 s.description  = <<-DESC
@@ -28,5 +28,7 @@ s.requires_arc = true
 s.frameworks = "Foundation", "UIKit", "AVFoundation"
 
 s.dependency "WJLoggingAPI"
+s.dependency "WJConfig", '>=2.0'
+s.dependency "Reachability"
 
 end

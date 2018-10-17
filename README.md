@@ -23,4 +23,16 @@ SimpleVideoMedia *media = [[SimpleVideoMedia alloc] initWithVideoUrl:@"https://v
 
 [playerView setMedia:media autoPlay:YES];
 
+
+//如果需要使用4G播放时需要询问，请在WJConfig中设置
+
+WJPlayerKit:
+    {
+        "askPlayControlView":""
+    }
+    
+注意：askPlayControlView需要继承 AbstractAskPlayControlView类
+
 ```
+
+### 

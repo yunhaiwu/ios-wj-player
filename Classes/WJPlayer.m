@@ -11,6 +11,7 @@
 #import "WJPlayerContext.h"
 #import "WJMediaCacheFactory.h"
 #import "WJLoggingAPI.h"
+#import "Reachability.h"
 
 @interface WJPlayer()
 
@@ -183,7 +184,34 @@ static NSDictionary *playerItemObserveOptions;
             WJ_PLAYER_CONTEXT_TIME_SET(weakSelf.mediaData.mediaURL.absoluteString, seconds);
         }
     }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReachabilityChangedNotification:) name:kReachabilityChangedNotification object:nil];
 }
+
+static BOOL cellNetworkShouldPlay;
+
+- (void)cellNetworkCanPlay {
+    cellNetworkShouldPlay = YES;
+}
+
+-(void)handleReachabilityChangedNotification:(NSNotification*)notification {
+    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    switch (status) {
+        case ReachableViaWWAN:
+            if ([self status] == WJPlayerStatusPlaying && !cellNetworkShouldPlay) {
+                //暂停播放
+                [self pause];
+                //调用委托
+                [self.delegate playerDidAskCellNetworkCanPlay:self];
+            }
+            break;
+        case ReachableViaWiFi:
+//            if (self.status == WJPlayerStatusPaused) [self play];
+            break;
+        default:
+            break;
+    }
+}
+
 -(void)setMuted:(BOOL)muted {
     if (_muted == muted) return;
     [self willChangeValueForKey:@"muted"];
@@ -284,6 +312,13 @@ static NSDictionary *playerItemObserveOptions;
     if (previousPlayer != self) {
         [previousPlayer cleanPlayer];
     }
+    
+    //询问4G情况下是否播放
+    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN && !cellNetworkShouldPlay) {
+        [self.delegate playerDidAskCellNetworkCanPlay:self];
+        return;
+    }
+    
     WJ_PLAYER_CONTEXT_CURRENT_PLAYER_SET(self);
     if (self.player) {
         if (self.status == WJPlayerStatusReadyToPlay || self.status == WJPlayerStatusPaused) {
