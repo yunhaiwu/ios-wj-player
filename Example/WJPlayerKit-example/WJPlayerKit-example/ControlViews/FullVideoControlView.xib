@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,9 +22,7 @@
                         <constraint firstAttribute="height" constant="30" id="5kd-0E-97C"/>
                         <constraint firstAttribute="width" constant="50" id="Hzk-ik-3J2"/>
                     </constraints>
-                    <state key="normal" title="播放">
-                        <color key="titleColor" red="1" green="0.068093612999581277" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
+                    <state key="normal" title="播放"/>
                     <connections>
                         <action selector="btnExec:" destination="iN0-l3-epB" eventType="touchUpInside" id="ggu-Er-sn3"/>
                     </connections>
@@ -34,9 +33,7 @@
                         <constraint firstAttribute="height" constant="30" id="1z0-UI-sKn"/>
                         <constraint firstAttribute="width" constant="50" id="ZqR-rP-gB4"/>
                     </constraints>
-                    <state key="normal" title="重播">
-                        <color key="titleColor" red="1" green="0.068093612999999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
+                    <state key="normal" title="重播"/>
                     <connections>
                         <action selector="replayExec:" destination="iN0-l3-epB" eventType="touchUpInside" id="m15-Eg-TDi"/>
                     </connections>
@@ -51,14 +48,11 @@
                     <color key="textColor" name="Color"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <slider opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10h-kk-Chc">
+                <slider opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10h-kk-Chc">
                     <rect key="frame" x="78" y="174" width="329" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="29" id="nWj-CP-ICq"/>
                     </constraints>
-                    <color key="minimumTrackTintColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="maximumTrackTintColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="thumbTintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="sliderChangeValue:" destination="iN0-l3-epB" eventType="valueChanged" id="BqP-n6-Jz6"/>
                         <action selector="sliderTouchUpInside:" destination="iN0-l3-epB" eventType="touchUpInside" id="WNo-cM-6GW"/>

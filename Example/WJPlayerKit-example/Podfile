@@ -14,5 +14,6 @@ pod 'SDWebImage/Core', '4.4.2'
 pod 'Reachability'
 pod 'WJLoggingAPI'
 pod 'WJConfig', '>=2.0'
+pod 'Masonry'
 
 end

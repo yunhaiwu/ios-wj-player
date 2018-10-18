@@ -9,11 +9,17 @@
 /* Begin PBXBuildFile section */
 		6053F03921772CC700B828E1 /* Default4GAskControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F03821772CC700B828E1 /* Default4GAskControlView.m */; };
 		6053F03D21772D4D00B828E1 /* application_config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6053F03C21772D4D00B828E1 /* application_config.plist */; };
+		6053F041217832CD00B828E1 /* BasePlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F040217832CD00B828E1 /* BasePlayerControlView.m */; };
+		6053F044217834AB00B828E1 /* PlayerLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F043217834AB00B828E1 /* PlayerLoadingView.m */; };
+		6053F0462178372700B828E1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6053F0452178372700B828E1 /* Default-568h@2x.png */; };
+		6053F04B21785AE700B828E1 /* PlayerReplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F04A21785AE700B828E1 /* PlayerReplayView.m */; };
+		6053F04E21785EC500B828E1 /* PlayerStateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */; };
+		6053F05121786D2C00B828E1 /* PlayerSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F05021786D2C00B828E1 /* PlayerSlider.m */; };
+		6053F0542178727300B828E1 /* PlayerBottomOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */; };
+		6053F057217875D500B828E1 /* PlayerTopOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F056217875D500B828E1 /* PlayerTopOperationBar.m */; };
 		6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */; };
 		60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E87C216CA112002F2638 /* AppDelegate.m */; };
-		60A1E883216CA112002F2638 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E881216CA112002F2638 /* Main.storyboard */; };
 		60A1E885216CA113002F2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E884216CA113002F2638 /* Assets.xcassets */; };
-		60A1E888216CA113002F2638 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E886216CA113002F2638 /* LaunchScreen.storyboard */; };
 		60A1E88B216CA113002F2638 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E88A216CA113002F2638 /* main.m */; };
 		60A1E895216CA113002F2638 /* WJPlayerKit_exampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E894216CA113002F2638 /* WJPlayerKit_exampleTests.m */; };
 		60A1E8B4216CA17A002F2638 /* WJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8A1216CA179002F2638 /* WJPlayer.m */; };
@@ -58,14 +64,27 @@
 		6053F03721772CC700B828E1 /* Default4GAskControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Default4GAskControlView.h; sourceTree = "<group>"; };
 		6053F03821772CC700B828E1 /* Default4GAskControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Default4GAskControlView.m; sourceTree = "<group>"; };
 		6053F03C21772D4D00B828E1 /* application_config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = application_config.plist; sourceTree = "<group>"; };
+		6053F03F217832CD00B828E1 /* BasePlayerControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePlayerControlView.h; sourceTree = "<group>"; };
+		6053F040217832CD00B828E1 /* BasePlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasePlayerControlView.m; sourceTree = "<group>"; };
+		6053F042217834AB00B828E1 /* PlayerLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerLoadingView.h; sourceTree = "<group>"; };
+		6053F043217834AB00B828E1 /* PlayerLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerLoadingView.m; sourceTree = "<group>"; };
+		6053F0452178372700B828E1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6053F04921785AE700B828E1 /* PlayerReplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerReplayView.h; sourceTree = "<group>"; };
+		6053F04A21785AE700B828E1 /* PlayerReplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerReplayView.m; sourceTree = "<group>"; };
+		6053F04C21785EC500B828E1 /* PlayerStateIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerStateIndicatorView.h; sourceTree = "<group>"; };
+		6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerStateIndicatorView.m; sourceTree = "<group>"; };
+		6053F04F21786D2C00B828E1 /* PlayerSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerSlider.h; sourceTree = "<group>"; };
+		6053F05021786D2C00B828E1 /* PlayerSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerSlider.m; sourceTree = "<group>"; };
+		6053F0522178727300B828E1 /* PlayerBottomOperationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerBottomOperationBar.h; sourceTree = "<group>"; };
+		6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerBottomOperationBar.m; sourceTree = "<group>"; };
+		6053F055217875D500B828E1 /* PlayerTopOperationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerTopOperationBar.h; sourceTree = "<group>"; };
+		6053F056217875D500B828E1 /* PlayerTopOperationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerTopOperationBar.m; sourceTree = "<group>"; };
 		6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractAskPlayControlView.h; sourceTree = "<group>"; };
 		6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractAskPlayControlView.m; sourceTree = "<group>"; };
 		60A1E878216CA112002F2638 /* WJPlayerKit-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WJPlayerKit-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A1E87B216CA112002F2638 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		60A1E87C216CA112002F2638 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		60A1E882216CA112002F2638 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60A1E884216CA113002F2638 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		60A1E887216CA113002F2638 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60A1E889216CA113002F2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60A1E88A216CA113002F2638 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		60A1E890216CA113002F2638 /* WJPlayerKit-exampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WJPlayerKit-exampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,9 +177,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6053F03E2178329900B828E1 /* BaseViews */ = {
+			isa = PBXGroup;
+			children = (
+				6053F03F217832CD00B828E1 /* BasePlayerControlView.h */,
+				6053F040217832CD00B828E1 /* BasePlayerControlView.m */,
+				6053F042217834AB00B828E1 /* PlayerLoadingView.h */,
+				6053F043217834AB00B828E1 /* PlayerLoadingView.m */,
+				6053F04921785AE700B828E1 /* PlayerReplayView.h */,
+				6053F04A21785AE700B828E1 /* PlayerReplayView.m */,
+				6053F04F21786D2C00B828E1 /* PlayerSlider.h */,
+				6053F05021786D2C00B828E1 /* PlayerSlider.m */,
+				6053F04C21785EC500B828E1 /* PlayerStateIndicatorView.h */,
+				6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */,
+				6053F0522178727300B828E1 /* PlayerBottomOperationBar.h */,
+				6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */,
+				6053F055217875D500B828E1 /* PlayerTopOperationBar.h */,
+				6053F056217875D500B828E1 /* PlayerTopOperationBar.m */,
+			);
+			path = BaseViews;
+			sourceTree = "<group>";
+		};
 		60A1E86F216CA112002F2638 = {
 			isa = PBXGroup;
 			children = (
+				6053F0452178372700B828E1 /* Default-568h@2x.png */,
 				60C8953C216F4F7C00E5AA1A /* README.md */,
 				60A1E8EE216CABC2002F2638 /* WJPlayerKit.podspec */,
 				60A1E89F216CA14E002F2638 /* Classes */,
@@ -184,6 +225,7 @@
 		60A1E87A216CA112002F2638 /* WJPlayerKit-example */ = {
 			isa = PBXGroup;
 			children = (
+				6053F03E2178329900B828E1 /* BaseViews */,
 				60A1E8D1216CA21C002F2638 /* Audio */,
 				60A1E8CC216CA21C002F2638 /* LIstVideos */,
 				60A1E8D4216CA21D002F2638 /* Root */,
@@ -192,9 +234,7 @@
 				60A1E8EF216CAFC5002F2638 /* ControlViews */,
 				60A1E87C216CA112002F2638 /* AppDelegate.m */,
 				60A1E87B216CA112002F2638 /* AppDelegate.h */,
-				60A1E881216CA112002F2638 /* Main.storyboard */,
 				60A1E884216CA113002F2638 /* Assets.xcassets */,
-				60A1E886216CA113002F2638 /* LaunchScreen.storyboard */,
 				60A1E889216CA113002F2638 /* Info.plist */,
 				60A1E88A216CA113002F2638 /* main.m */,
 				6053F03C21772D4D00B828E1 /* application_config.plist */,
@@ -291,7 +331,6 @@
 		60A1E8D7216CA21D002F2638 /* SimpleVideo */ = {
 			isa = PBXGroup;
 			children = (
-				60A1E8D9216CA21D002F2638 /* SimpleVideoControlView.xib */,
 				60A1E8DA216CA21D002F2638 /* SimpleVideoViewController.h */,
 				60A1E8DC216CA21D002F2638 /* SimpleVideoViewController.m */,
 			);
@@ -301,6 +340,7 @@
 		60A1E8EF216CAFC5002F2638 /* ControlViews */ = {
 			isa = PBXGroup;
 			children = (
+				60A1E8D9216CA21D002F2638 /* SimpleVideoControlView.xib */,
 				60A1E8D8216CA21D002F2638 /* SimpleVideoControlView.h */,
 				60A1E8DB216CA21D002F2638 /* SimpleVideoControlView.m */,
 				60C89534216EF50D00E5AA1A /* FullVideoControlView.h */,
@@ -409,9 +449,8 @@
 			files = (
 				60C89538216EF60E00E5AA1A /* FullVideoControlView.xib in Resources */,
 				60A1E8E2216CA21D002F2638 /* SimpleVideoControlView.xib in Resources */,
-				60A1E888216CA113002F2638 /* LaunchScreen.storyboard in Resources */,
 				60A1E885216CA113002F2638 /* Assets.xcassets in Resources */,
-				60A1E883216CA112002F2638 /* Main.storyboard in Resources */,
+				6053F0462178372700B828E1 /* Default-568h@2x.png in Resources */,
 				6053F03D21772D4D00B828E1 /* application_config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,7 +498,10 @@
 				60A1E8EC216CA33A002F2638 /* BaseTableViewController.m in Sources */,
 				60A1E8E0216CA21D002F2638 /* AudioPlayViewController.m in Sources */,
 				60A1E8BA216CA17A002F2638 /* SimpleAudioMedia.m in Sources */,
+				6053F044217834AB00B828E1 /* PlayerLoadingView.m in Sources */,
+				6053F041217832CD00B828E1 /* BasePlayerControlView.m in Sources */,
 				60A1E88B216CA113002F2638 /* main.m in Sources */,
+				6053F057217875D500B828E1 /* PlayerTopOperationBar.m in Sources */,
 				60A1E8C8216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m in Sources */,
 				60A1E8F2216CB032002F2638 /* BaseControlView.m in Sources */,
 				60A1E8ED216CA33A002F2638 /* BaseNavigationViewController.m in Sources */,
@@ -470,10 +512,14 @@
 				60A1E8E3216CA21D002F2638 /* SimpleVideoControlView.m in Sources */,
 				60A1E8DE216CA21D002F2638 /* VideoTableViewCell.m in Sources */,
 				60A1E8B8216CA17A002F2638 /* SimpleMediaCache.m in Sources */,
+				6053F04B21785AE700B828E1 /* PlayerReplayView.m in Sources */,
+				6053F04E21785EC500B828E1 /* PlayerStateIndicatorView.m in Sources */,
 				60A1E8B5216CA17A002F2638 /* WJPlayerView.m in Sources */,
 				60A1E8B6216CA17A002F2638 /* WJPlayerContext.m in Sources */,
+				6053F05121786D2C00B828E1 /* PlayerSlider.m in Sources */,
 				60A1E8C7216CA1C3002F2638 /* SimplePlayerPosterView.m in Sources */,
 				60A1E8B7216CA17A002F2638 /* WJMediaCacheFactory.m in Sources */,
+				6053F0542178727300B828E1 /* PlayerBottomOperationBar.m in Sources */,
 				60A1E8EB216CA33A002F2638 /* BaseViewController.m in Sources */,
 				60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */,
 				6053F03921772CC700B828E1 /* Default4GAskControlView.m in Sources */,
@@ -497,25 +543,6 @@
 			targetProxy = 60A1E891216CA113002F2638 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		60A1E881216CA112002F2638 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				60A1E882216CA112002F2638 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		60A1E886216CA113002F2638 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				60A1E887216CA113002F2638 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		60A1E897216CA113002F2638 /* Debug */ = {
@@ -638,7 +665,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5D39YL5D57;
 				INFOPLIST_FILE = "WJPlayerKit-example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -657,7 +684,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5D39YL5D57;
 				INFOPLIST_FILE = "WJPlayerKit-example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
