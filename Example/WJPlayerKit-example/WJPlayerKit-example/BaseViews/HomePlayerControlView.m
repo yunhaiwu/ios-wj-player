@@ -157,8 +157,6 @@
         
         [[[bar slider] rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
             @strongify(self)
-            [self.stateIndicatorView setTotalDuration:self.player.duration];
-            [self.stateIndicatorView setBeginTime:self.player.currentPlayTime];
             [self.stateIndicatorView setCurrentTime:self.player.duration*bar.slider.value];
         }];
         [[[bar slider] rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(__kindof UIControl * _Nullable x) {

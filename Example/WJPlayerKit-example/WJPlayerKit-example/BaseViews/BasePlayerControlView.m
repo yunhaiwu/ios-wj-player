@@ -40,7 +40,7 @@
 
 #pragma mark UIGestureRecognizerDelegate
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return !(gestureRecognizer == _panGesture && [touch.view isKindOfClass:[UISlider class]]);
+    return ![touch.view isKindOfClass:[UISlider class]];
 }
 
 -(void)singleTapGestureHandler {}
@@ -185,6 +185,7 @@
                 if (!self.singleTapGesture) {
                     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleGesture:)];
                     tap.delaysTouchesBegan = YES;
+                    [tap setDelegate:self];
                     [self addGestureRecognizer:tap];
                     self.singleTapGesture = tap;
                     if (self.doubleTapGesture) [self.singleTapGesture requireGestureRecognizerToFail:self.doubleTapGesture];
@@ -204,6 +205,7 @@
                 if (!self.doubleTapGesture) {
                     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleGesture:)];
                     [tap setNumberOfTapsRequired:2];
+                    [tap setDelegate:self];
                     [self addGestureRecognizer:tap];
                     self.doubleTapGesture = tap;
                     if (self.singleTapGesture) [self.singleTapGesture requireGestureRecognizerToFail:self.doubleTapGesture];
