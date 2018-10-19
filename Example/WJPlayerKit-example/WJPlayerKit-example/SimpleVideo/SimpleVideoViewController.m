@@ -11,10 +11,12 @@
 #import "WJPlayerView.h"
 #import "SimpleVideoMedia.h"
 #import "SimpleVideoPlayView.h"
+#import "GaussianBlurPosterView.h"
+#import "HomePlayerControlView.h"
 
 @interface SimpleVideoViewController ()
 
-@property(nonatomic, weak) SimpleVideoPlayView *simpleVideoPlayView;
+@property(nonatomic, weak) WJPlayerView *playerView;
 
 @end
 
@@ -25,12 +27,21 @@
     [super viewDidLoad];
     self.title = @"Simple Video";
     
-    if (!_simpleVideoPlayView) {
-        SimpleVideoPlayView *v = [[SimpleVideoPlayView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*9/16.0f)];
+//    if (!_simpleVideoPlayView) {
+//        SimpleVideoPlayView *v = [[SimpleVideoPlayView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*9/16.0f)];
+//        [self.view addSubview:v];
+//        [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+//        _simpleVideoPlayView = v;
+//        [v.playerView setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/review/15244807024027823.mp4" posterUrl:nil] autoPlay:YES];
+//    }
+    
+    if (!_playerView) {
+        WJPlayerView *v = [[WJPlayerView alloc] initWithControlView:[HomePlayerControlView new] posterView:[GaussianBlurPosterView new]];
+        [v setFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*9/16.0f)];
         [self.view addSubview:v];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
-        _simpleVideoPlayView = v;
-        [v.playerView setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/review/15244807024027823.mp4" posterUrl:nil] autoPlay:YES];
+        _playerView = v;
+        [v setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/tweet/15348228538940033_trans.mp4" posterUrl:@"https://img.piaoniu.com/video/6933133337ca225b3bea50ed318cf316af9f6f5c.jpg"] autoPlay:NO];
     }
     
 }

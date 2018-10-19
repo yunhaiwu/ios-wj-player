@@ -12,12 +12,10 @@
 
 /**
  底部操作栏block
-
- @param progress 更新进度
  @param playOrPause 播放或者暂停
  @param transform 全屏/退出全屏
  */
-typedef void (^PlayerBottomOperationBarActionBlock)(float progress, BOOL playOrPause, BOOL transform);
+typedef void (^PlayerBottomOperationBarActionBlock)(BOOL playOrPause, BOOL transform);
 
 /**
  底部控制栏 height 44.0f
@@ -30,14 +28,12 @@ typedef void (^PlayerBottomOperationBarActionBlock)(float progress, BOOL playOrP
 @property(nonatomic, weak, readonly) PlayerSlider *slider;
 
 /**
- slider value
- */
-@property(nonatomic, assign) float progress;
-
-/**
  是否显示播放状态
  */
 @property(nonatomic, assign) BOOL playing;
+
+
+@property(nonatomic, assign) int currentTime,totalTime;
 
 
 -(void)setActionBlock:(PlayerBottomOperationBarActionBlock)actionBlock;

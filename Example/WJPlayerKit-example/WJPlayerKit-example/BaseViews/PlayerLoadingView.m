@@ -61,6 +61,7 @@
 }
 
 -(void)startAnimating {
+    [self setHidden:NO];
     if (![self isAnimating]) {
         CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(rotateAction)];
         if (@available(iOS 10.0, *)) {
@@ -76,6 +77,7 @@
 }
 
 -(void)stopAnimating {
+    [self setHidden:YES];
     if ([self isAnimating]) {
         [self.displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
         [self.displayLink invalidate];

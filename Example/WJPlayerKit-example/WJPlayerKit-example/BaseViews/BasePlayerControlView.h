@@ -24,13 +24,13 @@
  单击手势（显示、隐藏操作栏）
  default NO
  */
-@property(nonatomic, assign) BOOL enableSingleGesture;
+@property(nonatomic, assign) BOOL enableSingleTapGesture;
 
 /**
  双击手势(暂停、播放)
  default NO
  */
-@property(nonatomic, assign) BOOL enableDoubleGesture;
+@property(nonatomic, assign) BOOL enableDoubleTapGesture;
 
 /**
  拖拽手势（快进、快退、亮度、音量）
@@ -50,6 +50,11 @@
  */
 @property(nonatomic, assign) BOOL enableBtnPlay;
 
+/**
+ 是否为全屏Control View
+ default NO
+ */
+@property(nonatomic, assign) BOOL isFullScreen;
 
 
 @property(nonatomic, weak) PlayerStateIndicatorView *stateIndicatorView;
@@ -66,9 +71,16 @@
 - (void)refreshPlayStatus:(WJPlayerStatus)status;
 
 /**
- 显示或者隐藏Bar
- 注意：子类需要继承使用
+ 单击手势处理方法
+ 默认实现：无，子类可重写方法实现新逻辑
  */
-- (void)showOrHideBar:(BOOL)animated;
+- (void)singleTapGestureHandler;
+
+
+/**
+ 双击手势
+ 默认实现：暂停或播放，子类可重写方法实现新逻辑
+ */
+- (void)doubleTapGestureHandler;
 
 @end

@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, StateIndicatorType) {
     //亮度
     StateIndicatorTypeBrightess,
     
+    //声音
+    StateIndicatorTypeVolume,
 };
 
 /**

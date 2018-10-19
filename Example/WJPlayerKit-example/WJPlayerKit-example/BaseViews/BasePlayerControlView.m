@@ -25,7 +25,7 @@
 @property(nonatomic, weak) PlayerReplayView *replayView;
 
 //单击手势、双击手势
-@property(nonatomic, weak) UITapGestureRecognizer *singleGesture, *doubleGesture;
+@property(nonatomic, weak) UITapGestureRecognizer *singleTapGesture, *doubleTapGesture;
 
 @property(nonatomic, weak) UIPanGestureRecognizer *panGesture;
 
@@ -43,9 +43,9 @@
     return !(gestureRecognizer == _panGesture && [touch.view isKindOfClass:[UISlider class]]);
 }
 
--(void)showOrHideBar:(BOOL)animated {}
+-(void)singleTapGestureHandler {}
 
-- (void)handleDoubleGesture:(UITapGestureRecognizer*)gesture {
+-(void)doubleTapGestureHandler {
     if ([self.player status] == WJPlayerStatusPlaying) {
         [self.player pause];
         //添加动画
@@ -55,12 +55,16 @@
     }
 }
 
+- (void)handleDoubleGesture:(UITapGestureRecognizer*)gesture {
+    [self doubleTapGestureHandler];
+}
+
 - (void)handleSingleGesture:(UITapGestureRecognizer*)gesture {
-    [self showOrHideBar:YES];
+    [self singleTapGestureHandler];
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer*)gesture {
-    [self.panGestureHandler handleGesture:gesture view:self];
+    [self.panGestureHandler handleGesture:gesture view:self player:self.player isFullScreen:self.isFullScreen];
 }
 
 -(void)refreshPlayStatus:(WJPlayerStatus)status {
@@ -69,7 +73,7 @@
     } else {
         [_loadingView stopAnimating];
     }
-    if (_btnPlay) [_btnPlay setHidden:status != WJPlayerStatusUnknown];
+    if (_btnPlay) [_btnPlay setHidden:(status != WJPlayerStatusUnknown && status != WJPlayerStatusPaused)];
     if (_replayView) {
         if (status == WJPlayerStatusCompleted) {
             [_replayView setHidden:NO];
@@ -160,7 +164,7 @@
                 if (!self.btnPlay) {
                     UIButton *play = [UIButton buttonWithType:UIButtonTypeCustom];
                     [play setImage:[UIImage imageNamed:@"player-play"] forState:UIControlStateNormal];
-                    [self addSubview:v];
+                    [self addSubview:play];
                     self.btnPlay = play;
                     [self.btnPlay setFrame:CGRectMake((self.bounds.size.width-40)/2.0f, (self.bounds.size.height-40)/2.0f, 40, 40)];
                     @weakify(self)
@@ -175,39 +179,39 @@
         }];
         
         //观察单击手势
-        [[self rac_valuesAndChangesForKeyPath:@"enableSingleGesture" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+        [[self rac_valuesAndChangesForKeyPath:@"enableSingleTapGesture" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
             @strongify(self)
-            if (self.enableSingleGesture) {
-                if (!self.singleGesture) {
+            if (self.enableSingleTapGesture) {
+                if (!self.singleTapGesture) {
                     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleGesture:)];
                     tap.delaysTouchesBegan = YES;
                     [self addGestureRecognizer:tap];
-                    self.singleGesture = tap;
-                    if (self.doubleGesture) [self.singleGesture requireGestureRecognizerToFail:self.doubleGesture];
+                    self.singleTapGesture = tap;
+                    if (self.doubleTapGesture) [self.singleTapGesture requireGestureRecognizerToFail:self.doubleTapGesture];
                 }
             } else {
-                if (self.singleGesture) {
-                    [self removeGestureRecognizer:self.singleGesture];
-                    self.singleGesture = nil;
+                if (self.singleTapGesture) {
+                    [self removeGestureRecognizer:self.singleTapGesture];
+                    self.singleTapGesture = nil;
                 }
             }
         }];
         
         //观察双击手势
-        [[self rac_valuesAndChangesForKeyPath:@"enableDoubleGesture" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+        [[self rac_valuesAndChangesForKeyPath:@"enableDoubleTapGesture" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
             @strongify(self)
-            if (self.enableDoubleGesture) {
-                if (!self.doubleGesture) {
+            if (self.enableDoubleTapGesture) {
+                if (!self.doubleTapGesture) {
                     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleGesture:)];
                     [tap setNumberOfTapsRequired:2];
                     [self addGestureRecognizer:tap];
-                    self.doubleGesture = tap;
-                    if (self.singleGesture) [self.singleGesture requireGestureRecognizerToFail:self.doubleGesture];
+                    self.doubleTapGesture = tap;
+                    if (self.singleTapGesture) [self.singleTapGesture requireGestureRecognizerToFail:self.doubleTapGesture];
                 }
             } else {
-                if (self.doubleGesture) {
-                    [self removeGestureRecognizer:self.doubleGesture];
-                    self.doubleGesture = nil;
+                if (self.doubleTapGesture) {
+                    [self removeGestureRecognizer:self.doubleTapGesture];
+                    self.doubleTapGesture = nil;
                 }
             }
         }];
@@ -223,13 +227,13 @@
                     self.panGesture = pan;
                     self.panGestureHandler = [[PlayerPanGestureHandler alloc] init];
                     @weakify(self)
-                    [self.panGestureHandler setCallbackBlock:^(StateIndicatorType type, BOOL seek, int timeValue, BOOL brightness, float brightnessValue, BOOL progress, int progressValue) {
-                        @strongify(self)
-                        [self.stateIndicatorView setType:type];
-                        if (seek) [self.player seekToTime:timeValue];
-                        if (brightness) [self.stateIndicatorView setBrightness:brightnessValue];
-                        if (progress) [self.stateIndicatorView setCurrentTime:progressValue];
-                    }];
+//                    [self.panGestureHandler setCallbackBlock:^(StateIndicatorType type, BOOL seek, int timeValue, BOOL brightness, float brightnessValue, BOOL progress, int progressValue) {
+//                        @strongify(self)
+//                        [self.stateIndicatorView setType:type];
+//                        if (seek) [self.player seekToTime:timeValue];
+//                        if (brightness) [self.stateIndicatorView setBrightness:brightnessValue];
+//                        if (progress) [self.stateIndicatorView setCurrentTime:progressValue];
+//                    }];
                 }
             } else {
                 if (self.panGesture) {

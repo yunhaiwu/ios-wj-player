@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "PlayerStateIndicatorView.h"
+#import "IWJPlayer.h"
 
-typedef void (^PlayerPanGestureHandlerCallbackBlock)(StateIndicatorType type, BOOL seek, int seekValue, BOOL brightness, float brightnessValue, BOOL progress, int progressValue);
+typedef void (^PlayerPanGestureHandlerCallbackBlock)(StateIndicatorType type, NSNumber *value, BOOL isEnd);
 
 /**
  播放器拖拽手势处理器
@@ -22,6 +23,6 @@ typedef void (^PlayerPanGestureHandlerCallbackBlock)(StateIndicatorType type, BO
 /**
  处理手势
  */
--(void)handleGesture:(UIPanGestureRecognizer*)gesture view:(UIView*)view;
+-(void)handleGesture:(UIPanGestureRecognizer*)gesture view:(UIView*)view player:(id<IWJPlayer>)player isFullScreen:(BOOL)isFullScreen;
 
 @end

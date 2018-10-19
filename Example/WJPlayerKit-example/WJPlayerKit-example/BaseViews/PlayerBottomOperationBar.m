@@ -8,12 +8,13 @@
 
 #import "PlayerBottomOperationBar.h"
 #import <Masonry/Masonry.h>
+#import "TimeStringFormatter.h"
 
 @interface PlayerBottomOperationBar()
 
 @property(nonatomic, weak) UIButton *btnTransform, *btnPlayOrPause;
 
-@property(nonatomic, weak) UILabel *currentTime, *totalTime;
+@property(nonatomic, weak) UILabel *labCurrentTime, *labTotalTime;
 
 @property(nonatomic, copy) PlayerBottomOperationBarActionBlock copyActionBlock;
 
@@ -51,6 +52,14 @@
     return self;
 }
 
+-(void)refreshTimeUI {
+    [self.labCurrentTime setText:[TimeStringFormatter formatTime:_currentTime]];
+    [self.labTotalTime setText:[TimeStringFormatter formatTime:_totalTime]];
+    if (![self.slider isTracking]) {
+        [self.slider setValue:(self.currentTime*1.0f/self.totalTime) animated:NO];
+    }
+}
+
 - (void)performInitialize {
     if (!_gradientLayer) {
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -69,7 +78,7 @@
         @weakify(self)
         [[btnPlayOrPause rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
             @strongify(self)
-            if (self.copyActionBlock != NULL) self.copyActionBlock(0, YES, NO);
+            if (self.copyActionBlock != NULL) self.copyActionBlock(YES, NO);
         }];
         [btnPlayOrPause mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 30));
@@ -82,7 +91,7 @@
         _btnTransform = btnTransform;
         [[btnTransform rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
             @strongify(self)
-            if (self.copyActionBlock != NULL) self.copyActionBlock(0, NO, YES);
+            if (self.copyActionBlock != NULL) self.copyActionBlock(NO, YES);
         }];
         [btnTransform mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 30));
@@ -96,7 +105,7 @@
         [currentTimeLab setTextColor:[UIColor whiteColor]];
         [currentTimeLab setFont:[UIFont fontWithName:@"HelveticaNeue" size:10]];
         [self addSubview:currentTimeLab];
-        _currentTime = currentTimeLab;
+        _labCurrentTime = currentTimeLab;
         [currentTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
             @strongify(self)
             make.width.mas_greaterThanOrEqualTo(10);
@@ -111,7 +120,7 @@
         [totalTimeLab setTextColor:[UIColor whiteColor]];
         [totalTimeLab setFont:[UIFont fontWithName:@"HelveticaNeue" size:10]];
         [self addSubview:totalTimeLab];
-        _totalTime = totalTimeLab;
+        _labTotalTime = totalTimeLab;
         [totalTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
             @strongify(self)
             make.width.mas_greaterThanOrEqualTo(10);
@@ -127,19 +136,21 @@
             @strongify(self)
             make.height.mas_equalTo(30);
             make.bottom.equalTo(self).offset(-2);
-            make.left.equalTo(self.currentTime.mas_right).offset(12);
-            make.right.equalTo(self.totalTime.mas_left).offset(-12);
+            make.left.equalTo(self.labCurrentTime.mas_right).offset(12);
+            make.right.equalTo(self.labTotalTime.mas_left).offset(-12);
         }];
         
-        [[self rac_valuesAndChangesForKeyPath:@"progress" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-            @strongify(self)
-            if (![self.slider isTracking]) {
-                [self.slider setValue:self.progress];
-            }
-        }];
         [[self rac_valuesAndChangesForKeyPath:@"playing" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
             @strongify(self)
             [self.btnPlayOrPause setImage:[UIImage imageNamed:(self.playing ? @"player-operation-bar-pause" : @"player-operation-bar-play")] forState:UIControlStateNormal];
+        }];
+        [[self rac_valuesAndChangesForKeyPath:@"currentTime" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+            @strongify(self)
+            [self refreshTimeUI];
+        }];
+        [[self rac_valuesAndChangesForKeyPath:@"totalTime" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+            @strongify(self)
+            [self refreshTimeUI];
         }];
     }
     [self setBackgroundColor:[UIColor clearColor]];
