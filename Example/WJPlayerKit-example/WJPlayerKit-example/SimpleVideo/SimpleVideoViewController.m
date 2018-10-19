@@ -41,7 +41,7 @@
         [self.view addSubview:v];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
         _playerView = v;
-        [v setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/tweet/15348228538940033_trans.mp4" posterUrl:@"https://img.piaoniu.com/video/6933133337ca225b3bea50ed318cf316af9f6f5c.jpg"] autoPlay:NO];
+        [v setMedia:[[SimpleVideoMedia alloc] initWithVideoUrl:@"https://video.piaoniu.com/tweet/15348319108120791_trans.mp4" posterUrl:@"https://img.piaoniu.com/video/ea9ac5419b5e1930b685a98529436e9aef9c3575.jpg"] autoPlay:NO];
     }
     
 }

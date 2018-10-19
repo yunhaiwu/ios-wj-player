@@ -47,8 +47,9 @@
 -(CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value {
     rect.origin.x = rect.origin.x - 7;
     rect.size.width = rect.size.width + 14;
+    rect.origin.y = rect.origin.y - 7;
+    rect.size.height = rect.size.height + 14;
     return CGRectInset ([super thumbRectForBounds:bounds trackRect:rect value:value], 7 , 7);
-    
 }
 
 @end

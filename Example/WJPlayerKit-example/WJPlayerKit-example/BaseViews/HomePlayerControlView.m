@@ -35,15 +35,11 @@
             [UIView animateWithDuration:0.25f animations:^{
                 self.bottomBar.frame = CGRectMake(0, self.bounds.size.height-36.0f, self.bounds.size.width, 36.0f);
             } completion:^(BOOL finished) {
-                if (self.player.status == WJPlayerStatusPlaying) {
-                    [self startTimerHideBarAction];
-                }
+                [self startTimerHideBarAction];
             }];
         } else {
             self.bottomBar.frame = CGRectMake(0, self.bounds.size.height-36.0f, self.bounds.size.width, 36.0f);
-            if (self.player.status == WJPlayerStatusPlaying) {
-                [self startTimerHideBarAction];
-            }
+            [self startTimerHideBarAction];
         }
     }
 }
@@ -71,20 +67,26 @@
 
 - (void)startTimerHideBarAction {
     [self closeTimer];
-    @weakify(self)
-    _timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
-        @strongify(self)
-        [self hideBar:YES];
-        [self closeTimer];
-    }];
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    if (self.player.status == WJPlayerStatusPlaying) {
+        @weakify(self)
+        _timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            @strongify(self)
+            if (self.player.status == WJPlayerStatusPlaying) [self hideBar:YES];
+            [self closeTimer];
+        }];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
 }
 
 - (void)singleTapGestureHandler {
-    if ([self isHiddenBar]) {
-        [self showBar:YES];
+    if (self.player.status != WJPlayerStatusUnknown) {
+        if ([self isHiddenBar]) {
+            [self showBar:YES];
+        } else {
+            [self hideBar:YES];
+        }
     } else {
-        [self hideBar:YES];
+        [self hideBar:NO];
     }
 }
 
@@ -140,6 +142,7 @@
         @weakify(self)
         [bar setActionBlock:^(BOOL playOrPause, BOOL mute) {
             @strongify(self)
+            [self startTimerHideBarAction];
             if (playOrPause) {
                 if ([self.player status] == WJPlayerStatusPlaying) {
                     [self.player pause];
@@ -150,6 +153,28 @@
             if (mute) {
                 [self.player setMuted:!self.player.muted];
             }
+        }];
+        
+        [[[bar slider] rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            @strongify(self)
+            [self.stateIndicatorView setTotalDuration:self.player.duration];
+            [self.stateIndicatorView setBeginTime:self.player.currentPlayTime];
+            [self.stateIndicatorView setCurrentTime:self.player.duration*bar.slider.value];
+        }];
+        [[[bar slider] rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            @strongify(self)
+            [self closeTimer];
+            [self.stateIndicatorView setType:StateIndicatorTypeProgress];
+            [self.stateIndicatorView setTotalDuration:self.player.duration];
+            [self.stateIndicatorView setBeginTime:self.player.currentPlayTime];
+            [self.stateIndicatorView setCurrentTime:self.player.duration*bar.slider.value];
+        }];
+        [[[bar slider] rac_signalForControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside|UIControlEventTouchCancel] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            @strongify(self)
+            [self.stateIndicatorView setType:StateIndicatorTypeNone];
+            int t = self.player.duration*bar.slider.value;
+            [self.player seekToTime:t];
+            [self startTimerHideBarAction];
         }];
         
         UILabel *lab = [UILabel new];

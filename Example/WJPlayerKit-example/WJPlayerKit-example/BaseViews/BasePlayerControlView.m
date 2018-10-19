@@ -49,7 +49,7 @@
     if ([self.player status] == WJPlayerStatusPlaying) {
         [self.player pause];
         //添加动画
-    } else if ([self.player status] == WJPlayerStatusPaused) {
+    } else {
         [self.player play];
         //添加动画
     }
