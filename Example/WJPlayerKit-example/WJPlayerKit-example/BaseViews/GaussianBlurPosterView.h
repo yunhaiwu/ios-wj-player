@@ -1,8 +1,8 @@
 //
-//  GaussianBlurPlayerPosterView.h
-//  WJPlayer
+//  GaussianBlurPosterView.h
+//  WJPlayerKit-example
 //
-//  Created by Yunhai.Wu on 2018/9/13.
+//  Created by ada on 2018/10/18.
 //  Copyright © 2018年 PN. All rights reserved.
 //
 
@@ -10,10 +10,7 @@
 #import "IWJPlayerPosterView.h"
 
 
-/**
- 高斯模糊海报视图
- */
-@interface GaussianBlurPlayerPosterView : UIView<IWJPlayerPosterView>
+@interface GaussianBlurPosterView : UIView<IWJPlayerPosterView>
 
 /**
  媒体数据

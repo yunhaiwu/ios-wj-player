@@ -1,17 +1,17 @@
 //
-//  GaussianBlurPlayerPosterView.m
-//  WJPlayer
+//  GaussianBlurPosterView.m
+//  WJPlayerKit-example
 //
-//  Created by Yunhai.Wu on 2018/9/13.
+//  Created by ada on 2018/10/18.
 //  Copyright © 2018年 PN. All rights reserved.
 //
 
-#import "GaussianBlurPlayerPosterView.h"
+#import "GaussianBlurPosterView.h"
 #import "UIImageView+WebCache.h"
 #import "SDImageCache.h"
 #import "ReactiveObjC.h"
 
-@interface GaussianBlurPlayerPosterView()
+@interface GaussianBlurPosterView ()
 
 @property(nonatomic, weak) UIImageView *posterImgView;
 
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation GaussianBlurPlayerPosterView
+@implementation GaussianBlurPosterView
 
 - (void)setMedia:(id<IWJMedia>)media {
     if (_media == media) return;
@@ -37,6 +37,7 @@
             [self.gaussianBlurImgView setImage:image];
         }];
     } else {
+        
         [_posterImgView setImage:nil];
         [_gaussianBlurImgView setImage:nil];
     }
@@ -50,7 +51,7 @@
         [gaussianBlurBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [gaussianBlurBg setContentMode:UIViewContentModeScaleAspectFill];
         _gaussianBlurImgView = gaussianBlurBg;
-
+        
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
         [effectview setFrame:gaussianBlurBg.bounds];

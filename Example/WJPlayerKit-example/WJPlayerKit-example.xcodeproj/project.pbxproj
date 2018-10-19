@@ -17,6 +17,8 @@
 		6053F05121786D2C00B828E1 /* PlayerSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F05021786D2C00B828E1 /* PlayerSlider.m */; };
 		6053F0542178727300B828E1 /* PlayerBottomOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */; };
 		6053F057217875D500B828E1 /* PlayerTopOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F056217875D500B828E1 /* PlayerTopOperationBar.m */; };
+		6053F05A21788A4300B828E1 /* GaussianBlurPosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F05921788A4300B828E1 /* GaussianBlurPosterView.m */; };
+		6053F05D2178AE6900B828E1 /* PlayerPanGestureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F05C2178AE6900B828E1 /* PlayerPanGestureHandler.m */; };
 		6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */; };
 		60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E87C216CA112002F2638 /* AppDelegate.m */; };
 		60A1E885216CA113002F2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E884216CA113002F2638 /* Assets.xcassets */; };
@@ -79,6 +81,10 @@
 		6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerBottomOperationBar.m; sourceTree = "<group>"; };
 		6053F055217875D500B828E1 /* PlayerTopOperationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerTopOperationBar.h; sourceTree = "<group>"; };
 		6053F056217875D500B828E1 /* PlayerTopOperationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerTopOperationBar.m; sourceTree = "<group>"; };
+		6053F05821788A4300B828E1 /* GaussianBlurPosterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GaussianBlurPosterView.h; sourceTree = "<group>"; };
+		6053F05921788A4300B828E1 /* GaussianBlurPosterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GaussianBlurPosterView.m; sourceTree = "<group>"; };
+		6053F05B2178AE6900B828E1 /* PlayerPanGestureHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerPanGestureHandler.h; sourceTree = "<group>"; };
+		6053F05C2178AE6900B828E1 /* PlayerPanGestureHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerPanGestureHandler.m; sourceTree = "<group>"; };
 		6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractAskPlayControlView.h; sourceTree = "<group>"; };
 		6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractAskPlayControlView.m; sourceTree = "<group>"; };
 		60A1E878216CA112002F2638 /* WJPlayerKit-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WJPlayerKit-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +188,8 @@
 			children = (
 				6053F03F217832CD00B828E1 /* BasePlayerControlView.h */,
 				6053F040217832CD00B828E1 /* BasePlayerControlView.m */,
+				6053F05B2178AE6900B828E1 /* PlayerPanGestureHandler.h */,
+				6053F05C2178AE6900B828E1 /* PlayerPanGestureHandler.m */,
 				6053F042217834AB00B828E1 /* PlayerLoadingView.h */,
 				6053F043217834AB00B828E1 /* PlayerLoadingView.m */,
 				6053F04921785AE700B828E1 /* PlayerReplayView.h */,
@@ -194,6 +202,8 @@
 				6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */,
 				6053F055217875D500B828E1 /* PlayerTopOperationBar.h */,
 				6053F056217875D500B828E1 /* PlayerTopOperationBar.m */,
+				6053F05821788A4300B828E1 /* GaussianBlurPosterView.h */,
+				6053F05921788A4300B828E1 /* GaussianBlurPosterView.m */,
 			);
 			path = BaseViews;
 			sourceTree = "<group>";
@@ -340,20 +350,20 @@
 		60A1E8EF216CAFC5002F2638 /* ControlViews */ = {
 			isa = PBXGroup;
 			children = (
-				60A1E8D9216CA21D002F2638 /* SimpleVideoControlView.xib */,
-				60A1E8D8216CA21D002F2638 /* SimpleVideoControlView.h */,
-				60A1E8DB216CA21D002F2638 /* SimpleVideoControlView.m */,
-				60C89534216EF50D00E5AA1A /* FullVideoControlView.h */,
-				60C89535216EF50D00E5AA1A /* FullVideoControlView.m */,
-				60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */,
-				60C89539216EF8B100E5AA1A /* SimpleVideoPlayView.h */,
-				60C8953A216EF8B100E5AA1A /* SimpleVideoPlayView.m */,
-				60A1E8BD216CA1C2002F2638 /* SimplePlayerControlView.h */,
-				60A1E8BE216CA1C3002F2638 /* SimplePlayerControlView.m */,
 				60A1E8F0216CB032002F2638 /* BaseControlView.h */,
 				60A1E8F1216CB032002F2638 /* BaseControlView.m */,
 				6053F03721772CC700B828E1 /* Default4GAskControlView.h */,
 				6053F03821772CC700B828E1 /* Default4GAskControlView.m */,
+				60C89534216EF50D00E5AA1A /* FullVideoControlView.h */,
+				60C89535216EF50D00E5AA1A /* FullVideoControlView.m */,
+				60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */,
+				60A1E8BD216CA1C2002F2638 /* SimplePlayerControlView.h */,
+				60A1E8BE216CA1C3002F2638 /* SimplePlayerControlView.m */,
+				60A1E8D8216CA21D002F2638 /* SimpleVideoControlView.h */,
+				60A1E8DB216CA21D002F2638 /* SimpleVideoControlView.m */,
+				60A1E8D9216CA21D002F2638 /* SimpleVideoControlView.xib */,
+				60C89539216EF8B100E5AA1A /* SimpleVideoPlayView.h */,
+				60C8953A216EF8B100E5AA1A /* SimpleVideoPlayView.m */,
 			);
 			path = ControlViews;
 			sourceTree = "<group>";
@@ -495,8 +505,10 @@
 				60A1E8E4216CA21D002F2638 /* SimpleVideoViewController.m in Sources */,
 				60C8953B216EF8B100E5AA1A /* SimpleVideoPlayView.m in Sources */,
 				60A1E8B9216CA17A002F2638 /* SimpleVideoMedia.m in Sources */,
+				6053F05D2178AE6900B828E1 /* PlayerPanGestureHandler.m in Sources */,
 				60A1E8EC216CA33A002F2638 /* BaseTableViewController.m in Sources */,
 				60A1E8E0216CA21D002F2638 /* AudioPlayViewController.m in Sources */,
+				6053F05A21788A4300B828E1 /* GaussianBlurPosterView.m in Sources */,
 				60A1E8BA216CA17A002F2638 /* SimpleAudioMedia.m in Sources */,
 				6053F044217834AB00B828E1 /* PlayerLoadingView.m in Sources */,
 				6053F041217832CD00B828E1 /* BasePlayerControlView.m in Sources */,
