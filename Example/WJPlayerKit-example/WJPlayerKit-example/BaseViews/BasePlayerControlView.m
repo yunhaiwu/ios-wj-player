@@ -91,6 +91,14 @@
     }
 }
 
+-(void)toggleOperationBar:(BOOL)animated {
+    if ([self isOperationBarHidden]) {
+        [self showOperationBar:animated];
+    } else {
+        [self hideOperatonBar:animated];
+    }
+}
+
 - (BOOL)isOperationBarHidden {
     if (self.bottomOperationBar) {
         return self.bottomOperationBar.frame.origin.y == self.bounds.size.height;
@@ -105,11 +113,7 @@
     if (self.player.status == WJPlayerStatusUnknown) {
         [self hideOperatonBar:NO];
     } else {
-        if ([self isOperationBarHidden]) {
-            [self showOperationBar:YES];
-        } else {
-            [self hideOperatonBar:YES];
-        }
+        [self toggleOperationBar:YES];
     }
 }
 

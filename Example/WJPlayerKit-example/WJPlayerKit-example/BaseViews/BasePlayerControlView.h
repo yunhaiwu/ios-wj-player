@@ -100,6 +100,12 @@
 - (void)hideOperatonBar:(BOOL)animated;
 
 /**
+ 显示/隐藏操作栏
+ 子类不要继承重写
+ */
+-(void)toggleOperationBar:(BOOL)animated;
+
+/**
  当前操作栏是否已隐藏
  子类不要继承重写
  */
