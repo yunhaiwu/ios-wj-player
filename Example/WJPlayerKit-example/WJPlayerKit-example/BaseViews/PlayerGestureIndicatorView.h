@@ -1,5 +1,5 @@
 //
-//  PlayerStateIndicatorView.h
+//  PlayerGestureIndicatorView.h
 //  WJPlayerKit-example
 //
 //  Created by ada on 2018/10/18.
@@ -12,7 +12,7 @@
 /**
  拖拽标识视图
  */
-@interface PlayerStateIndicatorView : UIView
+@interface PlayerGestureIndicatorView : UIView
 
 -(void)refreshGestureData:(PlayerGestureData*)gestureData;
 

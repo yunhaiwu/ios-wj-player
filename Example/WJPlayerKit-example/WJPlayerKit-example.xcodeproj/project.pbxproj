@@ -13,7 +13,7 @@
 		6053F044217834AB00B828E1 /* PlayerLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F043217834AB00B828E1 /* PlayerLoadingView.m */; };
 		6053F0462178372700B828E1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6053F0452178372700B828E1 /* Default-568h@2x.png */; };
 		6053F04B21785AE700B828E1 /* PlayerReplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F04A21785AE700B828E1 /* PlayerReplayView.m */; };
-		6053F04E21785EC500B828E1 /* PlayerStateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */; };
+		6053F04E21785EC500B828E1 /* PlayerGestureIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F04D21785EC500B828E1 /* PlayerGestureIndicatorView.m */; };
 		6053F05121786D2C00B828E1 /* PlayerSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F05021786D2C00B828E1 /* PlayerSlider.m */; };
 		6053F0542178727300B828E1 /* PlayerBottomOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */; };
 		6053F057217875D500B828E1 /* PlayerTopOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F056217875D500B828E1 /* PlayerTopOperationBar.m */; };
@@ -81,8 +81,8 @@
 		6053F0452178372700B828E1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6053F04921785AE700B828E1 /* PlayerReplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerReplayView.h; sourceTree = "<group>"; };
 		6053F04A21785AE700B828E1 /* PlayerReplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerReplayView.m; sourceTree = "<group>"; };
-		6053F04C21785EC500B828E1 /* PlayerStateIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerStateIndicatorView.h; sourceTree = "<group>"; };
-		6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerStateIndicatorView.m; sourceTree = "<group>"; };
+		6053F04C21785EC500B828E1 /* PlayerGestureIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerGestureIndicatorView.h; sourceTree = "<group>"; };
+		6053F04D21785EC500B828E1 /* PlayerGestureIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerGestureIndicatorView.m; sourceTree = "<group>"; };
 		6053F04F21786D2C00B828E1 /* PlayerSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerSlider.h; sourceTree = "<group>"; };
 		6053F05021786D2C00B828E1 /* PlayerSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerSlider.m; sourceTree = "<group>"; };
 		6053F0522178727300B828E1 /* PlayerBottomOperationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerBottomOperationBar.h; sourceTree = "<group>"; };
@@ -216,8 +216,8 @@
 				6053F077217CB53200B828E1 /* PlayerGestureData.m */,
 				6053F05B2178AE6900B828E1 /* PlayerPanGestureHandler.h */,
 				6053F05C2178AE6900B828E1 /* PlayerPanGestureHandler.m */,
-				6053F04C21785EC500B828E1 /* PlayerStateIndicatorView.h */,
-				6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */,
+				6053F04C21785EC500B828E1 /* PlayerGestureIndicatorView.h */,
+				6053F04D21785EC500B828E1 /* PlayerGestureIndicatorView.m */,
 				6053F042217834AB00B828E1 /* PlayerLoadingView.h */,
 				6053F043217834AB00B828E1 /* PlayerLoadingView.m */,
 				6053F04921785AE700B828E1 /* PlayerReplayView.h */,
@@ -570,7 +570,7 @@
 				60A1E8DE216CA21D002F2638 /* VideoTableViewCell.m in Sources */,
 				60A1E8B8216CA17A002F2638 /* SimpleMediaCache.m in Sources */,
 				6053F04B21785AE700B828E1 /* PlayerReplayView.m in Sources */,
-				6053F04E21785EC500B828E1 /* PlayerStateIndicatorView.m in Sources */,
+				6053F04E21785EC500B828E1 /* PlayerGestureIndicatorView.m in Sources */,
 				60A1E8B5216CA17A002F2638 /* WJPlayerView.m in Sources */,
 				60A1E8B6216CA17A002F2638 /* WJPlayerContext.m in Sources */,
 				6053F05121786D2C00B828E1 /* PlayerSlider.m in Sources */,

@@ -1,22 +1,22 @@
 //
-//  PlayerStateIndicatorView.m
+//  PlayerGestureIndicatorView.m
 //  WJPlayerKit-example
 //
 //  Created by ada on 2018/10/18.
 //  Copyright © 2018年 PN. All rights reserved.
 //
 
-#import "PlayerStateIndicatorView.h"
+#import "PlayerGestureIndicatorView.h"
 #import "ReactiveObjC.h"
 
-@interface PlayerStateIndicatorView()
+@interface PlayerGestureIndicatorView()
 
 @property(nonatomic, weak) UIImageView *indicatorImage;
 @property(nonatomic, weak) UILabel *indicatorLab;
 
 @end
 
-@implementation PlayerStateIndicatorView
+@implementation PlayerGestureIndicatorView
 
 -(instancetype)init {
     self = [super init];

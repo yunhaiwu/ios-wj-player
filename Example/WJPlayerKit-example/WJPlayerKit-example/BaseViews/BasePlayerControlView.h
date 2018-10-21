@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IWJPlayerControlView.h"
 #import "ReactiveObjC.h"
-#import "PlayerStateIndicatorView.h"
+#import "PlayerGestureIndicatorView.h"
 /**
  播放器控制视图基类
  */
@@ -51,7 +51,7 @@
 @property(nonatomic, assign) BOOL enableBtnPlay;
 
 
-@property(nonatomic, weak) PlayerStateIndicatorView *stateIndicatorView;
+@property(nonatomic, weak) PlayerGestureIndicatorView *gestureIndicatorView;
 
 /**
  顶部操作栏

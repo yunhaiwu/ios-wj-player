@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PlayerStateIndicatorView.h"
+#import "PlayerGestureIndicatorView.h"
 #import "IWJPlayer.h"
 #import "PlayerGestureData.h"
 

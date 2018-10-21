@@ -221,19 +221,19 @@
         [data setTotalDuration:self.player.duration];
         [data setBeginTime:self.player.currentPlayTime];
         [data setCurrentTime:self.player.duration*self.slider.value];
-        [self.stateIndicatorView refreshGestureData:data];
+        [self.gestureIndicatorView refreshGestureData:data];
     }];
     
     [[_slider rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self)
         [[PlayerGestureData getCacheGestureData] setCurrentTime:self.player.duration*self.slider.value];
-        [self.stateIndicatorView refreshGestureData:[PlayerGestureData getCacheGestureData]];
+        [self.gestureIndicatorView refreshGestureData:[PlayerGestureData getCacheGestureData]];
     }];
     
     [[_slider rac_signalForControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside|UIControlEventTouchCancel] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self)
         [[PlayerGestureData getCacheGestureData] reset];
-        [self.stateIndicatorView refreshGestureData:[PlayerGestureData getCacheGestureData]];
+        [self.gestureIndicatorView refreshGestureData:[PlayerGestureData getCacheGestureData]];
         int t = self.player.duration*self.slider.value;
         [self.player seekToTime:t];
         [self startHideBarTimer];
@@ -254,15 +254,15 @@
     if (_slider) [self addSliderEventsHandler:_sliderDisposables];
 }
 
--(PlayerStateIndicatorView *)stateIndicatorView {
-    if (!_stateIndicatorView) {
-        PlayerStateIndicatorView *v = [[PlayerStateIndicatorView alloc] initWithFrame:self.bounds];
+-(PlayerGestureIndicatorView *)gestureIndicatorView {
+    if (!_gestureIndicatorView) {
+        PlayerGestureIndicatorView *v = [[PlayerGestureIndicatorView alloc] initWithFrame:self.bounds];
         [self addSubview:v];
         [v setHidden:YES];
-        _stateIndicatorView = v;
+        _gestureIndicatorView = v;
     }
-    [self bringSubviewToFront:_stateIndicatorView];
-    return _stateIndicatorView;
+    [self bringSubviewToFront:_gestureIndicatorView];
+    return _gestureIndicatorView;
 }
 
 #pragma mark Init、LayoutSubviews
@@ -273,7 +273,7 @@
     [_loadingView setFrame:CGRectMake((self.bounds.size.width-24.0f)/2.0f, (self.bounds.size.height-24.0f)/2.0f, 24.0f, 24.0f)];
     if (_btnPlay) [_btnPlay setFrame:CGRectMake((self.bounds.size.width-40)/2.0f, (self.bounds.size.height-40)/2.0f, 40, 40)];
     if (_replayView) [_replayView setFrame:self.bounds];
-    if (_stateIndicatorView) [_stateIndicatorView setFrame:self.bounds];
+    if (_gestureIndicatorView) [_gestureIndicatorView setFrame:self.bounds];
     [CATransaction commit];
 }
 
@@ -388,7 +388,7 @@
                     @weakify(self)
                     [self.panGestureHandler setCallbackBlock:^(PlayerGestureData *gesture, BOOL isEnd) {
                         @strongify(self)
-                        [self.stateIndicatorView refreshGestureData:gesture];
+                        [self.gestureIndicatorView refreshGestureData:gesture];
                         if (isEnd && [gesture funcType] == PanGestureFuncTypeProgress) {
                             [self.player seekToTime:gesture.currentTime];
                             [self showOperationBar:NO];
