@@ -17,8 +17,6 @@
 
 @property(nonatomic, assign) BOOL currentHasFullScreen;
 
-@property(nonatomic, strong) BottomBarPlayerControlView *controlView;
-
 @end
 
 @implementation CanFullScreenVideoPlayView
@@ -61,8 +59,14 @@
         } completion:^(BOOL finished) {
             [pv removeFromSuperview];
             [self addSubview:pv];
-            [pv replaceControlView:self.controlView];
-            [self.controlView showOperationBar:NO];
+            BottomBarPlayerControlView *controlView = [[BottomBarPlayerControlView alloc] init];
+            @weakify(self)
+            [controlView setActionBlock:^(BOOL transform) {
+                @strongify(self)
+                [self fullScreenAction];
+            }];
+            [pv replaceControlView:controlView];
+            [controlView showOperationBar:NO];
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
         }];
     }
@@ -71,7 +75,6 @@
 - (void)loadSubviews {
     if (!_playerView) {
         BottomBarPlayerControlView *controlView = [[BottomBarPlayerControlView alloc] init];
-        self.controlView = controlView;
         @weakify(self)
         [controlView setActionBlock:^(BOOL transform) {
             @strongify(self)
