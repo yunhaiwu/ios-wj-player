@@ -7,15 +7,30 @@
 //
 
 #import "PlayerPanGestureHandler.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface PlayerPanGestureHandler()
 
 @property(nonatomic, copy) PlayerPanGestureHandlerCallbackBlock copyCallbackBlock;
 @property(nonatomic, strong) PlayerGestureData *gestureData;
+@property(nonatomic, strong) MPVolumeView *volumeView;
+@property(nonatomic, strong) UISlider *volumeSlider;
 @end
 
 @implementation PlayerPanGestureHandler
+
+- (void)initVolumeView {
+    if (!_volumeView) {
+        MPVolumeView *v = [[MPVolumeView alloc] initWithFrame:CGRectZero];
+        self.volumeView = v;
+        for (UIView *view in [v subviews]){
+            if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+                self.volumeSlider = (UISlider*)view;
+                break;
+            }
+        }
+    }
+}
 
 -(instancetype)init {
     self = [super init];
@@ -89,7 +104,8 @@
                     self.gestureData.currentVolume = self.gestureData.beginBrightness;
                 } else {
                     self.gestureData.funcType = PanGestureFuncTypeVolume;
-//                    self.gestureData.beginVolume = [[self.gestureData volumeSlider] value];
+                    [self initVolumeView];
+                    self.gestureData.beginVolume = [self.volumeSlider value];
                 }
             }
         }
@@ -100,7 +116,9 @@
     switch (_gestureData.funcType) {
         case PanGestureFuncTypeVolume:
         {
-            CGFloat value = fabs(translationPoint.y) / ([UIScreen mainScreen].bounds.size.width - 100.0f);
+            
+            CGFloat denominator = [UIScreen mainScreen].bounds.size.width < [UIScreen mainScreen].bounds.size.height ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].bounds.size.height;
+            CGFloat value = fabs(translationPoint.y) / (denominator - 100.0f);
             if (translationPoint.y > 0) {
                 if (_gestureData.beginVolume < value) {
                     _gestureData.currentVolume = 0.0f;
@@ -114,15 +132,13 @@
                     _gestureData.currentVolume = _gestureData.beginVolume + value;
                 }
             }
-            //设置声音
-            //设置声音
-            //设置声音
-//            [_gestureData setCurrentVolume:[_panGestureInfo volumeSlider].value]
+            [self.volumeSlider setValue:self.gestureData.currentVolume];
         }
             break;
         case PanGestureFuncTypeBrightess:
         {
-            CGFloat value = fabs(translationPoint.y) / ([UIScreen mainScreen].bounds.size.width - 100.0f);
+            CGFloat denominator = [UIScreen mainScreen].bounds.size.width < [UIScreen mainScreen].bounds.size.height ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].bounds.size.height;
+            CGFloat value = fabs(translationPoint.y) / (denominator - 100.0f);
             if (translationPoint.y > 0) {
                 if (_gestureData.beginBrightness < value) {
                     _gestureData.currentBrightness = 0.0f;

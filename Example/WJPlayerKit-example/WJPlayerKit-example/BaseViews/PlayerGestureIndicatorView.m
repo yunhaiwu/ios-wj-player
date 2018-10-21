@@ -100,7 +100,7 @@
         case PanGestureFuncTypeVolume:
             [self setHidden:NO];
             [_indicatorImage setImage:[UIImage imageNamed:@"player-indicator-volume"]];
-            [_indicatorLab setText:[NSString stringWithFormat:@"%i%%",(int)(gestureData.currentBrightness*100)]];
+            [_indicatorLab setText:[NSString stringWithFormat:@"%i%%",(int)(gestureData.currentVolume*100)]];
             [_indicatorLab setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
             break;
         default:
