@@ -35,6 +35,12 @@ typedef void (^PlayerBottomOperationBarActionBlock)(BOOL playOrPause, BOOL trans
 
 @property(nonatomic, assign) int currentTime,totalTime;
 
+/**
+ 是否全屏
+ default NO
+ */
+@property(nonatomic, assign) BOOL isFullScreen;
+
 
 -(void)setActionBlock:(PlayerBottomOperationBarActionBlock)actionBlock;
 

@@ -24,71 +24,71 @@
 
 @implementation HomePlayerControlView
 
--(void)dealloc {
-    [self closeTimer];
-}
+//-(void)dealloc {
+//    [self closeTimer];
+//}
+//
+//-(void)showBar:(BOOL)animated {
+//    if ([self isHiddenBar]) {
+//        [self closeTimer];
+//        if (animated) {
+//            [UIView animateWithDuration:0.25f animations:^{
+//                self.bottomBar.frame = CGRectMake(0, self.bounds.size.height-self.bottomBar.bounds.size.height, self.bounds.size.width, self.bottomBar.bounds.size.height);
+//            } completion:^(BOOL finished) {
+//                [self startTimerHideBarAction];
+//            }];
+//        } else {
+//            self.bottomBar.frame = CGRectMake(0, self.bounds.size.height-self.bottomBar.bounds.size.height, self.bounds.size.width, self.bottomBar.bounds.size.height);
+//            [self startTimerHideBarAction];
+//        }
+//    }
+//}
+//
+//-(void)hideBar:(BOOL)animated {
+//    if (![self isHiddenBar]) {
+//        if (animated) {
+//            [UIView animateWithDuration:0.25f animations:^{
+//                self.bottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bottomBar.bounds.size.height);
+//            }];
+//        } else {
+//            self.bottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bottomBar.bounds.size.height);
+//        }
+//    }
+//}
 
--(void)showBar:(BOOL)animated {
-    if ([self isHiddenBar]) {
-        [self closeTimer];
-        if (animated) {
-            [UIView animateWithDuration:0.25f animations:^{
-                self.bottomBar.frame = CGRectMake(0, self.bounds.size.height-36.0f, self.bounds.size.width, 36.0f);
-            } completion:^(BOOL finished) {
-                [self startTimerHideBarAction];
-            }];
-        } else {
-            self.bottomBar.frame = CGRectMake(0, self.bounds.size.height-36.0f, self.bounds.size.width, 36.0f);
-            [self startTimerHideBarAction];
-        }
-    }
-}
+//- (BOOL)isHiddenBar {
+//    return self.bottomBar.frame.origin.y == self.bounds.size.height;
+//}
+//
+//- (void)closeTimer {
+//    if ([_timer isValid]) [_timer invalidate];
+//    _timer = nil;
+//}
 
--(void)hideBar:(BOOL)animated {
-    if (![self isHiddenBar]) {
-        if (animated) {
-            [UIView animateWithDuration:0.25f animations:^{
-                self.bottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 36.0f);
-            }];
-        } else {
-            self.bottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 36.0f);
-        }
-    }
-}
+//- (void)startTimerHideBarAction {
+//    [self closeTimer];
+//    if (self.player.status == WJPlayerStatusPlaying) {
+//        @weakify(self)
+//        _timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+//            @strongify(self)
+//            if (self.player.status == WJPlayerStatusPlaying) [self hideBar:YES];
+//            [self closeTimer];
+//        }];
+//        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+//    }
+//}
 
-- (BOOL)isHiddenBar {
-    return self.bottomBar.frame.origin.y == self.bounds.size.height;
-}
-
-- (void)closeTimer {
-    if ([_timer isValid]) [_timer invalidate];
-    _timer = nil;
-}
-
-- (void)startTimerHideBarAction {
-    [self closeTimer];
-    if (self.player.status == WJPlayerStatusPlaying) {
-        @weakify(self)
-        _timer = [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
-            @strongify(self)
-            if (self.player.status == WJPlayerStatusPlaying) [self hideBar:YES];
-            [self closeTimer];
-        }];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-    }
-}
-
-- (void)singleTapGestureHandler {
-    if (self.player.status != WJPlayerStatusUnknown) {
-        if ([self isHiddenBar]) {
-            [self showBar:YES];
-        } else {
-            [self hideBar:YES];
-        }
-    } else {
-        [self hideBar:NO];
-    }
-}
+//- (void)singleTapGestureHandler {
+//    if (self.player.status != WJPlayerStatusUnknown) {
+//        if ([self isHiddenBar]) {
+//            [self showBar:YES];
+//        } else {
+//            [self hideBar:YES];
+//        }
+//    } else {
+//        [self hideBar:NO];
+//    }
+//}
 
 -(void)addPlayerObserver:(NSHashTable<RACDisposable *> *)disposables {
     @weakify(self)
@@ -98,23 +98,23 @@
         [self refreshPlayStatus:status];
         [self.bottomBar setPlaying:status == WJPlayerStatusPlaying];
         [self.labTotalDuration setHidden:status != WJPlayerStatusUnknown];
-        switch (status) {
-            case WJPlayerStatusPaused:
-                [self showBar:NO];
-                break;
-            case WJPlayerStatusPlaying:
-                [self showBar:NO];
-                [self startTimerHideBarAction];
-                break;
-            case WJPlayerStatusUnknown:
-                [self hideBar:NO];
-                break;
-            case WJPlayerStatusReadyToPlay:
-                [self showBar:NO];
-                break;
-            default:
-                break;
-        }
+//        switch (status) {
+//            case WJPlayerStatusPaused:
+//                [self showBar:NO];
+//                break;
+//            case WJPlayerStatusPlaying:
+//                [self showBar:NO];
+//                [self startTimerHideBarAction];
+//                break;
+//            case WJPlayerStatusUnknown:
+//                [self hideBar:NO];
+//                break;
+//            case WJPlayerStatusReadyToPlay:
+//                [self showBar:NO];
+//                break;
+//            default:
+//                break;
+//        }
     }]];
     
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"muted" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
@@ -138,11 +138,12 @@
         [self addSubview:bar];
         [bar setFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 36.0f)];
         [bar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin];
+        self.bottomOperationBar = bar;
         _bottomBar = bar;
         @weakify(self)
         [bar setActionBlock:^(BOOL playOrPause, BOOL mute) {
             @strongify(self)
-            [self startTimerHideBarAction];
+            [self startHideBarTimer];
             if (playOrPause) {
                 if ([self.player status] == WJPlayerStatusPlaying) {
                     [self.player pause];
@@ -161,7 +162,7 @@
         }];
         [[[bar slider] rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(__kindof UIControl * _Nullable x) {
             @strongify(self)
-            [self closeTimer];
+            [self cancelHideBarTimer];
             [self.stateIndicatorView setType:StateIndicatorTypeProgress];
             [self.stateIndicatorView setTotalDuration:self.player.duration];
             [self.stateIndicatorView setBeginTime:self.player.currentPlayTime];
@@ -172,7 +173,7 @@
             [self.stateIndicatorView setType:StateIndicatorTypeNone];
             int t = self.player.duration*bar.slider.value;
             [self.player seekToTime:t];
-            [self startTimerHideBarAction];
+            [self startHideBarTimer];
         }];
         
         UILabel *lab = [UILabel new];

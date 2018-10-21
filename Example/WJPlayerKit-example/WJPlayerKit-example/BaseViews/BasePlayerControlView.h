@@ -60,6 +60,11 @@
 @property(nonatomic, weak) PlayerStateIndicatorView *stateIndicatorView;
 
 /**
+ 顶部操作栏
+ */
+@property(nonatomic, weak) UIView *topOperationBar,*bottomOperationBar;
+
+/**
  添加观察者
  */
 -(void)addPlayerObserver:(NSHashTable<RACDisposable*>*)disposables;
@@ -72,15 +77,44 @@
 
 /**
  单击手势处理方法
- 默认实现：无，子类可重写方法实现新逻辑
+ 默认实现：显示或者隐藏操作栏
  */
 - (void)singleTapGestureHandler;
-
 
 /**
  双击手势
  默认实现：暂停或播放，子类可重写方法实现新逻辑
  */
 - (void)doubleTapGestureHandler;
+
+/**
+ 显示操作栏
+ 子类不要继承重写
+ */
+- (void)showOperationBar:(BOOL)animated;
+
+/**
+ 隐藏操作栏
+ 子类不要继承重写
+ */
+- (void)hideOperatonBar:(BOOL)animated;
+
+/**
+ 当前操作栏是否已隐藏
+ 子类不要继承重写
+ */
+- (BOOL)isOperationBarHidden;
+
+/**
+ 取消隐藏bar定时器
+ 子类不要继承重写
+ */
+- (void)cancelHideBarTimer;
+
+/**
+ 开启隐藏bar定时器
+ 子类不要继承重写
+ */
+- (void)startHideBarTimer;
 
 @end

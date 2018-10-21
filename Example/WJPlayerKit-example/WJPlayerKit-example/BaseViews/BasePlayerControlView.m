@@ -34,16 +34,84 @@
  */
 @property(nonatomic, strong) PlayerPanGestureHandler *panGestureHandler;
 
+@property(nonatomic, weak) NSTimer *hideBarTimer;
+
 @end
 
 @implementation BasePlayerControlView
 
-#pragma mark UIGestureRecognizerDelegate
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return ![touch.view isKindOfClass:[UISlider class]];
+-(void)cancelHideBarTimer {
+    if ([_hideBarTimer isValid]) {
+        [_hideBarTimer invalidate];
+    }
+    _hideBarTimer = nil;
 }
 
--(void)singleTapGestureHandler {}
+-(void)timerExec:(NSTimer*)timer {
+    if (self.player.status == WJPlayerStatusPlaying) [self hideOperatonBar:YES];
+    [self cancelHideBarTimer];
+}
+
+-(void)startHideBarTimer {
+    [self cancelHideBarTimer];
+    if (self.player.status == WJPlayerStatusPlaying) {
+        _hideBarTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerExec:) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:_hideBarTimer forMode:NSRunLoopCommonModes];
+    }
+}
+
+-(void)showOperationBar:(BOOL)animated {
+    if ([self isOperationBarHidden] && (self.bottomOperationBar || self.topOperationBar)) {
+        [self cancelHideBarTimer];
+        if (animated) {
+            [UIView animateWithDuration:0.25f animations:^{
+                self.bottomOperationBar.frame = CGRectMake(0, self.bounds.size.height-self.bottomOperationBar.bounds.size.height, self.bounds.size.width, self.bottomOperationBar.bounds.size.height);
+                self.topOperationBar.frame = CGRectMake(0, 0, self.bounds.size.width, self.topOperationBar.bounds.size.height);
+            } completion:^(BOOL finished) {
+                [self startHideBarTimer];
+            }];
+        } else {
+            self.bottomOperationBar.frame = CGRectMake(0, self.bounds.size.height-self.bottomOperationBar.bounds.size.height, self.bounds.size.width, self.bottomOperationBar.bounds.size.height);
+            self.topOperationBar.frame = CGRectMake(0, 0, self.bounds.size.width, self.topOperationBar.bounds.size.height);
+        }
+    }
+}
+
+-(void)hideOperatonBar:(BOOL)animated {
+    if (![self isOperationBarHidden] && (self.bottomOperationBar || self.topOperationBar)) {
+        if (animated) {
+            [UIView animateWithDuration:0.25f animations:^{
+                self.bottomOperationBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bottomOperationBar.bounds.size.height);
+                self.topOperationBar.frame = CGRectMake(0, -self.topOperationBar.frame.size.height, self.bounds.size.width, self.topOperationBar.frame.size.height);
+            }];
+        } else {
+            self.bottomOperationBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bottomOperationBar.bounds.size.height);
+            self.topOperationBar.frame = CGRectMake(0, -self.topOperationBar.bounds.size.height, self.bounds.size.width, self.topOperationBar.bounds.size.height);
+        }
+    }
+}
+
+- (BOOL)isOperationBarHidden {
+    if (self.bottomOperationBar) {
+        return self.bottomOperationBar.frame.origin.y == self.bounds.size.height;
+    }
+    if (self.topOperationBar) {
+        return self.topOperationBar.frame.origin.y == -self.topOperationBar.frame.size.height;
+    }
+    return NO;
+}
+
+- (void)singleTapGestureHandler {
+    if (self.player.status == WJPlayerStatusUnknown) {
+        [self hideOperatonBar:NO];
+    } else {
+        if ([self isOperationBarHidden]) {
+            [self showOperationBar:YES];
+        } else {
+            [self hideOperatonBar:YES];
+        }
+    }
+}
 
 -(void)doubleTapGestureHandler {
     if ([self.player status] == WJPlayerStatusPlaying) {
@@ -53,6 +121,11 @@
         [self.player play];
         //添加动画
     }
+}
+
+#pragma mark UIGestureRecognizerDelegate
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return ![touch.view isKindOfClass:[UISlider class]];
 }
 
 - (void)handleDoubleGesture:(UITapGestureRecognizer*)gesture {
@@ -73,7 +146,9 @@
     } else {
         [_loadingView stopAnimating];
     }
-    if (_btnPlay) [_btnPlay setHidden:(status != WJPlayerStatusUnknown && status != WJPlayerStatusPaused)];
+    if (_btnPlay) {
+        [_btnPlay setHidden:(status != WJPlayerStatusUnknown && status != WJPlayerStatusPaused)];
+    }
     if (_replayView) {
         if (status == WJPlayerStatusCompleted) {
             [_replayView setHidden:NO];
@@ -82,6 +157,23 @@
             [_replayView setHidden:YES];
         }
     }
+    switch (status) {
+        case WJPlayerStatusPaused:
+            [self showOperationBar:NO];
+            break;
+        case WJPlayerStatusPlaying:
+            [self showOperationBar:NO];
+            [self startHideBarTimer];
+            break;
+        case WJPlayerStatusUnknown:
+            [self hideOperatonBar:NO];
+            break;
+        case WJPlayerStatusReadyToPlay:
+            [self showOperationBar:NO];
+            break;
+        default:
+            break;
+    }    
 }
 
 -(void)removePlayerObserver {
@@ -229,6 +321,7 @@
                     self.panGesture = pan;
                     self.panGestureHandler = [[PlayerPanGestureHandler alloc] init];
                     @weakify(self)
+                    
 //                    [self.panGestureHandler setCallbackBlock:^(StateIndicatorType type, BOOL seek, int timeValue, BOOL brightness, float brightnessValue, BOOL progress, int progressValue) {
 //                        @strongify(self)
 //                        [self.stateIndicatorView setType:type];

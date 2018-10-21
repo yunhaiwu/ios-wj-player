@@ -14,10 +14,4 @@
  */
 @interface HomePlayerControlView : BasePlayerControlView
 
-- (void)showBar:(BOOL)animated;
-
-- (void)hideBar:(BOOL)animated;
-
-- (BOOL)isHiddenBar;
-
 @end

@@ -140,6 +140,10 @@
             make.right.equalTo(self.labTotalTime.mas_left).offset(-12);
         }];
         
+        [[self rac_valuesAndChangesForKeyPath:@"isFullScreen" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+            @strongify(self)
+            [self.btnTransform setImage:[UIImage imageNamed:(self.isFullScreen ? @"player-operation-bar-quit-fullscreen" : @"player-operation-bar-fullscreen")] forState:UIControlStateNormal];
+        }];
         [[self rac_valuesAndChangesForKeyPath:@"playing" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
             @strongify(self)
             [self.btnPlayOrPause setImage:[UIImage imageNamed:(self.playing ? @"player-operation-bar-pause" : @"player-operation-bar-play")] forState:UIControlStateNormal];
