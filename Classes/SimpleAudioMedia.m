@@ -20,19 +20,19 @@
 }
 
 #pragma mark IWJMedia
--(NSInteger)type {
+- (NSInteger)mediaType {
     return WJMediaTypeAudio;
 }
 
--(NSURL*)posterURL {
+- (NSURL*)mediaPosterURL {
     return _posterUrl;
 }
 
--(NSURL*)mediaURL {
+- (NSURL*)mediaURL {
     return _videoUrl;
 }
 
--(int)duration {
+- (int)mediaDuration {
     return 0;
 }
 

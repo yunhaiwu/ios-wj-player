@@ -27,12 +27,12 @@ typedef NS_ENUM (NSInteger, WJMediaType) {
 /**
  媒体类型
  */
--(NSInteger)type;
+-(NSInteger)mediaType;
 
 /**
  海报图url
  */
--(NSURL*)posterURL;
+-(NSURL*)mediaPosterURL;
 
 /**
  媒体资源url
@@ -42,13 +42,13 @@ typedef NS_ENUM (NSInteger, WJMediaType) {
 /**
  媒体总时长
  */
--(int)duration;
+-(int)mediaDuration;
 
 @optional
 
 /**
  海报占位符图片
  */
--(UIImage*)posterPlaceholder;
+-(UIImage*)mediaPosterPlaceholder;
 
 @end

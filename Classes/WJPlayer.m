@@ -277,7 +277,7 @@ static BOOL cellNetworkShouldPlay;
     self.playerItem = [[WJMediaCacheFactory getMediaCache] getPlayerItem:url];
     self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
     //视频媒体需要添加到当前视图层上
-    if ([_mediaData type] == WJMediaTypeVideo) {
+    if ([_mediaData mediaType] == WJMediaTypeVideo) {
         AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         [layer setBackgroundColor:[UIColor clearColor].CGColor];
         layer.player = self.player;

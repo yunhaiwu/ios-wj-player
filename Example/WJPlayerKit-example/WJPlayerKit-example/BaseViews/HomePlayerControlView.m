@@ -18,8 +18,6 @@
 
 @property(nonatomic, weak) UILabel *labTime;
 
-@property(nonatomic, weak) NSTimer *timer;
-
 @end
 
 @implementation HomePlayerControlView
@@ -47,9 +45,9 @@
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"mediaData" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         @strongify(self)
-        if ([self.player.mediaData duration] > 0) {
-            [self.bottomBar setTotalTime:[self.player.mediaData duration]];
-            [self.labTime setText:[TimeStringFormatter formatTime:[self.player.mediaData duration]]];
+        if ([self.player.mediaData mediaDuration] > 0) {
+            [self.bottomBar setTotalTime:[self.player.mediaData mediaDuration]];
+            [self.labTime setText:[TimeStringFormatter formatTime:[self.player.mediaData mediaDuration]]];
         }
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"currentPlayTime" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {

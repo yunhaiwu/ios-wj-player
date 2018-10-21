@@ -26,13 +26,13 @@
     _media = media;
     if (_media) {
         UIImage *posterPlaceholder = nil;
-        if ([_media respondsToSelector:@selector(posterPlaceholder)]) {
-            posterPlaceholder = [_media posterPlaceholder];
+        if ([_media respondsToSelector:@selector(mediaPosterPlaceholder)]) {
+            posterPlaceholder = [_media mediaPosterPlaceholder];
         }
         [self.posterImgView setImage:nil];
         [self.gaussianBlurImgView setImage:nil];
         
-        [self.posterImgView sd_setImageWithURL:[self.media posterURL] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [self.posterImgView sd_setImageWithURL:[self.media mediaPosterURL] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             [self.posterImgView setImage:image];
             [self.gaussianBlurImgView setImage:image];
         }];

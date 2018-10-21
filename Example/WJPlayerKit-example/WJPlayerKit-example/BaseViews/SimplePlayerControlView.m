@@ -65,7 +65,7 @@
 
 -(void)refreshTimeUI {
     if ([self.player duration] == 0) {
-        [self.labTime setText:[TimeStringFormatter formatTime:[self.player.mediaData duration]]];
+        [self.labTime setText:[TimeStringFormatter formatTime:[self.player.mediaData mediaDuration]]];
     } else {
         if ([self.player currentPlayTime] > 0) {
             [self.labTime setText:[TimeStringFormatter formatTime:self.player.duration-self.player.currentPlayTime]];
