@@ -12,7 +12,7 @@
 /**
  普通播放器控制视图
  */
-@interface SimplePlayerControlView : UIView<IWJPlayerControlView>
+@interface Simple2PlayerControlView : UIView<IWJPlayerControlView>
 
 @property(nonatomic, weak) id<IWJPlayer> player;
 

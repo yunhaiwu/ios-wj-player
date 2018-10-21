@@ -6,18 +6,18 @@
 //  Copyright © 2018年 PN. All rights reserved.
 //
 
-#import "SimplePlayerControlView.h"
+#import "Simple2PlayerControlView.h"
 #import "ReactiveObjC.h"
 #import "KVOController.h"
 
-@interface SimplePlayerControlView ()
+@interface Simple2PlayerControlView ()
 
 @property(nonatomic, weak) UIButton *button;
 @property(nonatomic, weak) UIActivityIndicatorView *loadingView;
 
 @end
 
-@implementation SimplePlayerControlView
+@implementation Simple2PlayerControlView
 
 -(void)setPlayer:(id<IWJPlayer>)player {
     if (_player == player) return;

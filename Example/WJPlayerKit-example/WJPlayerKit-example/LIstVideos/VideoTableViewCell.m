@@ -7,12 +7,14 @@
 //
 
 #import "VideoTableViewCell.h"
-#import "SimpleVideoPlayView.h"
+//#import "SimpleVideoPlayView.h"
+#import "CanFullScreenVideoPlayView.h"
 
 
 @interface VideoTableViewCell ()
 
-@property(nonatomic, weak) SimpleVideoPlayView *simpleVideoPlayView;
+//@property(nonatomic, weak) SimpleVideoPlayView *simpleVideoPlayView;
+@property(nonatomic, weak) CanFullScreenVideoPlayView *videoPlayView;
 
 @end
 
@@ -31,20 +33,22 @@
 -(void)setData:(SimpleVideoMedia *)data {
     if (_data == data) return;
     _data = data;
-    [[_simpleVideoPlayView playerView] setMedia:data autoPlay:NO];
+//    [[_simpleVideoPlayView playerView] setMedia:data autoPlay:NO];
+    [[_videoPlayView playerView] setMedia:data autoPlay:NO];
 }
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    [_simpleVideoPlayView setFrame:self.contentView.bounds];
+    [_videoPlayView setFrame:self.contentView.bounds];
+//    [_simpleVideoPlayView setFrame:self.contentView.bounds];
 }
 
 -(void)loadSubviews {
-    if ([self contentView] && !_simpleVideoPlayView) {
-        SimpleVideoPlayView *v = [[SimpleVideoPlayView alloc] initWithFrame:self.contentView.bounds];
+    if ([self contentView] && !_videoPlayView) {
+        CanFullScreenVideoPlayView *v = [[CanFullScreenVideoPlayView alloc] init];
         [self.contentView addSubview:v];
-        [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        _simpleVideoPlayView = v;
+        _videoPlayView = v;
+        [self setClipsToBounds:YES];
     }
 }
 

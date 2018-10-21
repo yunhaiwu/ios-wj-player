@@ -47,7 +47,7 @@
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"mediaData" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         @strongify(self)
-        if (self.player.mediaData) {
+        if ([self.player.mediaData duration] > 0) {
             [self.bottomBar setTotalTime:[self.player.mediaData duration]];
             [self.labTime setText:[TimeStringFormatter formatTime:[self.player.mediaData duration]]];
         }

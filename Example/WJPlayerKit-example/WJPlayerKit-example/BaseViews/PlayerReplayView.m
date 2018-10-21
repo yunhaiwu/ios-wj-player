@@ -46,6 +46,8 @@
     [self setBackgroundColor:[UIColor blackColor]];
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
+
 -(instancetype)init {
     self = [super init];
     if (self) {

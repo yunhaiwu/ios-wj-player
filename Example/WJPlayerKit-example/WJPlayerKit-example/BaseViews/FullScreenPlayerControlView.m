@@ -27,6 +27,8 @@
 }
 
 - (void)loadSubviews {
+    //当前视频为全屏
+    self.isFullScreen = YES;
     if (!_topBar) {
         PlayerTopOperationBar *topBar = [[PlayerTopOperationBar alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 44.0f)];
         [self addSubview:topBar];
@@ -76,7 +78,7 @@
             [self startHideBarTimer];
         }];
         
-        self.enablePanGesture = YES;
+//        self.enablePanGesture = YES;
         self.enableDoubleTapGesture = YES;
         self.enableSingleTapGesture = YES;
     }
@@ -98,7 +100,7 @@
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"mediaData" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         @strongify(self)
-        if (self.player.mediaData) {
+        if ([self.player.mediaData duration] > 0) {
             [self.bottomBar setTotalTime:[self.player.mediaData duration]];
         }
     }]];

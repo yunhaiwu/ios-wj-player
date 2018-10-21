@@ -63,7 +63,7 @@
             [self startHideBarTimer];
         }];
         
-        self.enablePanGesture = YES;
+//        self.enablePanGesture = YES;
         self.enableDoubleTapGesture = YES;
         self.enableSingleTapGesture = YES;
     }
@@ -85,7 +85,7 @@
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"mediaData" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         @strongify(self)
-        if (self.player.mediaData) {
+        if ([self.player.mediaData duration] > 0) {
             [self.bottomBar setTotalTime:[self.player.mediaData duration]];
         }
     }]];

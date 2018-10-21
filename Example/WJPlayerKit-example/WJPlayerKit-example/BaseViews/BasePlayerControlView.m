@@ -75,6 +75,7 @@
         } else {
             self.bottomOperationBar.frame = CGRectMake(0, self.bounds.size.height-self.bottomOperationBar.bounds.size.height, self.bounds.size.width, self.bottomOperationBar.bounds.size.height);
             self.topOperationBar.frame = CGRectMake(0, 0, self.bounds.size.width, self.topOperationBar.bounds.size.height);
+            [self startHideBarTimer];
         }
     }
 }
@@ -159,8 +160,14 @@
         if (status == WJPlayerStatusCompleted) {
             [_replayView setHidden:NO];
             [self bringSubviewToFront:self.replayView];
+            for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
+                [gesture setEnabled:NO];
+            }
         } else {
             [_replayView setHidden:YES];
+            for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
+                [gesture setEnabled:YES];
+            }
         }
     }
     switch (status) {

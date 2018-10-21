@@ -25,6 +25,7 @@
 		6053F0692179F13700B828E1 /* FullScreenPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0682179F13700B828E1 /* FullScreenPlayerControlView.m */; };
 		6053F06F217C52AD00B828E1 /* BottomBarPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F06E217C52AD00B828E1 /* BottomBarPlayerControlView.m */; };
 		6053F072217C546D00B828E1 /* SimplePlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F071217C546D00B828E1 /* SimplePlayerControlView.m */; };
+		6053F075217C6D2300B828E1 /* CanFullScreenVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F074217C6D2300B828E1 /* CanFullScreenVideoPlayView.m */; };
 		6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */; };
 		60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E87C216CA112002F2638 /* AppDelegate.m */; };
 		60A1E885216CA113002F2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E884216CA113002F2638 /* Assets.xcassets */; };
@@ -37,7 +38,7 @@
 		60A1E8B8216CA17A002F2638 /* SimpleMediaCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8AB216CA179002F2638 /* SimpleMediaCache.m */; };
 		60A1E8B9216CA17A002F2638 /* SimpleVideoMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8AD216CA179002F2638 /* SimpleVideoMedia.m */; };
 		60A1E8BA216CA17A002F2638 /* SimpleAudioMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8B1216CA17A002F2638 /* SimpleAudioMedia.m */; };
-		60A1E8C5216CA1C3002F2638 /* SimplePlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8BE216CA1C3002F2638 /* SimplePlayerControlView.m */; };
+		60A1E8C5216CA1C3002F2638 /* Simple2PlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8BE216CA1C3002F2638 /* Simple2PlayerControlView.m */; };
 		60A1E8C7216CA1C3002F2638 /* SimplePlayerPosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8C1216CA1C3002F2638 /* SimplePlayerPosterView.m */; };
 		60A1E8C8216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8C4216CA1C3002F2638 /* GaussianBlurPlayerPosterView.m */; };
 		60A1E8DE216CA21D002F2638 /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E8CE216CA21C002F2638 /* VideoTableViewCell.m */; };
@@ -103,6 +104,8 @@
 		6053F06E217C52AD00B828E1 /* BottomBarPlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BottomBarPlayerControlView.m; sourceTree = "<group>"; };
 		6053F070217C546D00B828E1 /* SimplePlayerControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimplePlayerControlView.h; sourceTree = "<group>"; };
 		6053F071217C546D00B828E1 /* SimplePlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayerControlView.m; sourceTree = "<group>"; };
+		6053F073217C6D2300B828E1 /* CanFullScreenVideoPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanFullScreenVideoPlayView.h; sourceTree = "<group>"; };
+		6053F074217C6D2300B828E1 /* CanFullScreenVideoPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanFullScreenVideoPlayView.m; sourceTree = "<group>"; };
 		6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractAskPlayControlView.h; sourceTree = "<group>"; };
 		6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractAskPlayControlView.m; sourceTree = "<group>"; };
 		60A1E878216CA112002F2638 /* WJPlayerKit-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WJPlayerKit-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,8 +138,8 @@
 		60A1E8B2216CA17A002F2638 /* WJPlayerContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPlayerContext.h; sourceTree = "<group>"; };
 		60A1E8B3216CA17A002F2638 /* IWJPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWJPlayerControlView.h; sourceTree = "<group>"; };
 		60A1E8BB216CA18A002F2638 /* WJPlayerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPlayerKit.h; sourceTree = "<group>"; };
-		60A1E8BD216CA1C2002F2638 /* SimplePlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlayerControlView.h; sourceTree = "<group>"; };
-		60A1E8BE216CA1C3002F2638 /* SimplePlayerControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePlayerControlView.m; sourceTree = "<group>"; };
+		60A1E8BD216CA1C2002F2638 /* Simple2PlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simple2PlayerControlView.h; sourceTree = "<group>"; };
+		60A1E8BE216CA1C3002F2638 /* Simple2PlayerControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Simple2PlayerControlView.m; sourceTree = "<group>"; };
 		60A1E8BF216CA1C3002F2638 /* SimplePlayerPosterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlayerPosterView.h; sourceTree = "<group>"; };
 		60A1E8C1216CA1C3002F2638 /* SimplePlayerPosterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePlayerPosterView.m; sourceTree = "<group>"; };
 		60A1E8C3216CA1C3002F2638 /* GaussianBlurPlayerPosterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaussianBlurPlayerPosterView.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				6053F071217C546D00B828E1 /* SimplePlayerControlView.m */,
 				6053F0642179BCAE00B828E1 /* TimeStringFormatter.h */,
 				6053F0652179BCAE00B828E1 /* TimeStringFormatter.m */,
+				6053F073217C6D2300B828E1 /* CanFullScreenVideoPlayView.h */,
+				6053F074217C6D2300B828E1 /* CanFullScreenVideoPlayView.m */,
 			);
 			path = BaseViews;
 			sourceTree = "<group>";
@@ -387,8 +392,8 @@
 				60C89534216EF50D00E5AA1A /* FullVideoControlView.h */,
 				60C89535216EF50D00E5AA1A /* FullVideoControlView.m */,
 				60C89537216EF60E00E5AA1A /* FullVideoControlView.xib */,
-				60A1E8BD216CA1C2002F2638 /* SimplePlayerControlView.h */,
-				60A1E8BE216CA1C3002F2638 /* SimplePlayerControlView.m */,
+				60A1E8BD216CA1C2002F2638 /* Simple2PlayerControlView.h */,
+				60A1E8BE216CA1C3002F2638 /* Simple2PlayerControlView.m */,
 				60A1E8D8216CA21D002F2638 /* SimpleVideoControlView.h */,
 				60A1E8DB216CA21D002F2638 /* SimpleVideoControlView.m */,
 				60A1E8D9216CA21D002F2638 /* SimpleVideoControlView.xib */,
@@ -536,6 +541,7 @@
 				60C8953B216EF8B100E5AA1A /* SimpleVideoPlayView.m in Sources */,
 				6053F0662179BCAE00B828E1 /* TimeStringFormatter.m in Sources */,
 				60A1E8B9216CA17A002F2638 /* SimpleVideoMedia.m in Sources */,
+				6053F075217C6D2300B828E1 /* CanFullScreenVideoPlayView.m in Sources */,
 				6053F05D2178AE6900B828E1 /* PlayerPanGestureHandler.m in Sources */,
 				60A1E8EC216CA33A002F2638 /* BaseTableViewController.m in Sources */,
 				60A1E8E0216CA21D002F2638 /* AudioPlayViewController.m in Sources */,
@@ -550,7 +556,7 @@
 				60A1E8F2216CB032002F2638 /* BaseControlView.m in Sources */,
 				60A1E8ED216CA33A002F2638 /* BaseNavigationViewController.m in Sources */,
 				60C89536216EF50D00E5AA1A /* FullVideoControlView.m in Sources */,
-				60A1E8C5216CA1C3002F2638 /* SimplePlayerControlView.m in Sources */,
+				60A1E8C5216CA1C3002F2638 /* Simple2PlayerControlView.m in Sources */,
 				6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */,
 				60A1E8DF216CA21D002F2638 /* ListVideoViewController.m in Sources */,
 				6053F0692179F13700B828E1 /* FullScreenPlayerControlView.m in Sources */,
