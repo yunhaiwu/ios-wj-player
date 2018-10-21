@@ -14,7 +14,7 @@
 @property(nonatomic, copy) PlayerPanGestureHandlerCallbackBlock copyCallbackBlock;
 @property(nonatomic, strong) PlayerGestureData *gestureData;
 @property(nonatomic, strong) MPVolumeView *volumeView;
-@property(nonatomic, strong) UISlider *volumeSlider;
+@property(nonatomic, weak) UISlider *volumeSlider;
 @end
 
 @implementation PlayerPanGestureHandler

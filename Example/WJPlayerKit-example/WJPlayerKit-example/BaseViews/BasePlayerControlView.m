@@ -149,6 +149,12 @@
     [self.panGestureHandler handleGesture:gesture view:self player:self.player];
 }
 
+-(void)enabledGestures:(BOOL)enable {
+    for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
+        [gesture setEnabled:enable];
+    }
+}
+
 -(void)refreshPlayStatus:(WJPlayerStatus)status {
     if (status == WJPlayerStatusLoading) {
         [_loadingView startAnimating];
@@ -162,16 +168,11 @@
         if (status == WJPlayerStatusCompleted) {
             [_replayView setHidden:NO];
             [self bringSubviewToFront:self.replayView];
-            for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
-                [gesture setEnabled:NO];
-            }
         } else {
             [_replayView setHidden:YES];
-            for (UIGestureRecognizer *gesture in self.gestureRecognizers) {
-                [gesture setEnabled:YES];
-            }
         }
     }
+    [self enabledGestures:(status != WJPlayerStatusUnknown && status != WJPlayerStatusCompleted)];
     switch (status) {
         case WJPlayerStatusPaused:
             [self showOperationBar:NO];

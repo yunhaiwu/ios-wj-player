@@ -45,7 +45,7 @@
         
         self.slider = [bottomBar slider];
         
-//        self.enablePanGesture = YES;
+        self.enablePanGesture = YES;
         self.enableDoubleTapGesture = YES;
         self.enableSingleTapGesture = YES;
     }
