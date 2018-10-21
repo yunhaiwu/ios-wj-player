@@ -29,7 +29,7 @@
     self.copyCallbackBlock = block;
 }
 
--(void)handleGesture:(UIPanGestureRecognizer *)gesture view:(UIView *)view player:(id<IWJPlayer>)player isFullScreen:(BOOL)isFullScreen {
+-(void)handleGesture:(UIPanGestureRecognizer *)gesture view:(UIView *)view player:(id<IWJPlayer>)player {
     CGPoint translationPoint = [gesture translationInView:view];
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
@@ -39,14 +39,14 @@
             break;
         case UIGestureRecognizerStateChanged:
         {
-            [self determinePanGestureTypeIfNeeded:translationPoint player:player isFullScreen:isFullScreen];
+            [self determinePanGestureTypeIfNeeded:translationPoint player:player];
             [self handleTranslationPoint:translationPoint];
             self.copyCallbackBlock(self.gestureData, NO);
         }
             break;
         case UIGestureRecognizerStateEnded:
         {
-            [self determinePanGestureTypeIfNeeded:translationPoint player:player isFullScreen:isFullScreen];
+            [self determinePanGestureTypeIfNeeded:translationPoint player:player];
             [self handleTranslationPoint:translationPoint];
             self.copyCallbackBlock(self.gestureData, YES);
             [self.gestureData reset];
@@ -55,12 +55,12 @@
             break;
         default:
             [self.gestureData reset];
-            self.copyCallbackBlock(self.gestureData, YES);
+            self.copyCallbackBlock(self.gestureData, NO);
             break;
     }
 }
 
--(void)determinePanGestureTypeIfNeeded:(CGPoint)translation player:(id<IWJPlayer>)player isFullScreen:(BOOL)isFullScreen {
+-(void)determinePanGestureTypeIfNeeded:(CGPoint)translation player:(id<IWJPlayer>)player {
     if (self.gestureData.funcType == PanGestureFuncTypeNone) {
         if (fabs(translation.x) > 10.0f) {
             BOOL horizontal = NO;
@@ -82,7 +82,7 @@
                 vertical = (fabs(translation.y/translation.x) > 5.0f);
             }
             if (vertical) {
-                CGFloat v = isFullScreen ? ([UIScreen mainScreen].bounds.size.height / 2.0f) : ([UIScreen mainScreen].bounds.size.width / 2.0f);
+                CGFloat v = [UIScreen mainScreen].bounds.size.width / 2.0f;
                 if (self.gestureData.beginPoint.x < v) {
                     self.gestureData.funcType = PanGestureFuncTypeBrightess;
                     self.gestureData.beginBrightness = [UIScreen mainScreen].brightness;

@@ -146,7 +146,7 @@
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer*)gesture {
-    [self.panGestureHandler handleGesture:gesture view:self player:self.player isFullScreen:self.isFullScreen];
+    [self.panGestureHandler handleGesture:gesture view:self player:self.player];
 }
 
 -(void)refreshPlayStatus:(WJPlayerStatus)status {
@@ -389,6 +389,10 @@
                     [self.panGestureHandler setCallbackBlock:^(PlayerGestureData *gesture, BOOL isEnd) {
                         @strongify(self)
                         [self.stateIndicatorView refreshGestureData:gesture];
+                        if (isEnd && [gesture funcType] == PanGestureFuncTypeProgress) {
+                            [self.player seekToTime:gesture.currentTime];
+                            [self showOperationBar:NO];
+                        }
                     }];
                 }
             } else {

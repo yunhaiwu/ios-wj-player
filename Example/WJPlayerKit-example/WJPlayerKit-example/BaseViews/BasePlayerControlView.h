@@ -50,12 +50,6 @@
  */
 @property(nonatomic, assign) BOOL enableBtnPlay;
 
-/**
- 是否为全屏Control View
- default NO
- */
-@property(nonatomic, assign) BOOL isFullScreen;
-
 
 @property(nonatomic, weak) PlayerStateIndicatorView *stateIndicatorView;
 

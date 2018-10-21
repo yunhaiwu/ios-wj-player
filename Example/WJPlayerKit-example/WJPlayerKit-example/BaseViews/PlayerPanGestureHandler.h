@@ -23,6 +23,6 @@ typedef void (^PlayerPanGestureHandlerCallbackBlock)(PlayerGestureData *gesture,
 /**
  处理手势
  */
--(void)handleGesture:(UIPanGestureRecognizer*)gesture view:(UIView*)view player:(id<IWJPlayer>)player isFullScreen:(BOOL)isFullScreen;
+-(void)handleGesture:(UIPanGestureRecognizer*)gesture view:(UIView*)view player:(id<IWJPlayer>)player;
 
 @end

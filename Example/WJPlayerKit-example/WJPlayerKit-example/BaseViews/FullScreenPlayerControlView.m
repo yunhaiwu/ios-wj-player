@@ -27,8 +27,6 @@
 }
 
 - (void)loadSubviews {
-    //当前视频为全屏
-    self.isFullScreen = YES;
     if (!_topBar) {
         PlayerTopOperationBar *topBar = [[PlayerTopOperationBar alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 44.0f)];
         [self addSubview:topBar];
