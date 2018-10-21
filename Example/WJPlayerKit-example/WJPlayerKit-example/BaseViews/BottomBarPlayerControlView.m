@@ -1,49 +1,36 @@
 //
-//  FullScreenPlayerControlView.m
+//  BottomBarPlayerControlView.m
 //  WJPlayerKit-example
 //
-//  Created by ada on 2018/10/19.
+//  Created by ada on 2018/10/21.
 //  Copyright © 2018年 PN. All rights reserved.
 //
 
-#import "FullScreenPlayerControlView.h"
-#import "PlayerTopOperationBar.h"
+#import "BottomBarPlayerControlView.h"
 #import "PlayerBottomOperationBar.h"
 
-@interface FullScreenPlayerControlView()
+@interface BottomBarPlayerControlView()
 
 @property(nonatomic, weak) PlayerBottomOperationBar *bottomBar;
 
-@property(nonatomic, weak) PlayerTopOperationBar *topBar;
-
-@property(nonatomic, copy) FullScreenPlayerControlViewActionBlock copyActionBlock;
+@property(nonatomic, copy) BottomBarPlayerControlViewActionBlock copyActionBlock;
 
 @end
 
-@implementation FullScreenPlayerControlView
+@implementation BottomBarPlayerControlView
 
--(void)setActionBlock:(FullScreenPlayerControlViewActionBlock)actionBlock {
+-(void)setActionBlock:(BottomBarPlayerControlViewActionBlock)actionBlock {
     self.copyActionBlock = actionBlock;
 }
 
 - (void)loadSubviews {
-    if (!_topBar) {
-        PlayerTopOperationBar *topBar = [[PlayerTopOperationBar alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 44.0f)];
-        [self addSubview:topBar];
-        [topBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
-        _topBar = topBar;
-        self.topOperationBar = topBar;
-        @weakify(self)
-        [topBar setActionBlock:^{
-            @strongify(self)
-            if (NULL != self.copyActionBlock) self.copyActionBlock(YES);
-        }];
-        
+    if (!_bottomBar) {
         PlayerBottomOperationBar *bottomBar = [[PlayerBottomOperationBar alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 44.0f)];
         [self addSubview:bottomBar];
         [bottomBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin];
         _bottomBar = bottomBar;
         self.bottomOperationBar = bottomBar;
+        @weakify(self)
         [bottomBar setActionBlock:^(BOOL playOrPause, BOOL transform) {
             @strongify(self)
             if (playOrPause) {

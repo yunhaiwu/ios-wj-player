@@ -53,10 +53,12 @@
 }
 
 -(void)startHideBarTimer {
-    [self cancelHideBarTimer];
-    if (self.player.status == WJPlayerStatusPlaying) {
-        _hideBarTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerExec:) userInfo:nil repeats:NO];
-        [[NSRunLoop currentRunLoop] addTimer:_hideBarTimer forMode:NSRunLoopCommonModes];
+    if (self.bottomOperationBar || self.topOperationBar) {
+        [self cancelHideBarTimer];
+        if (self.player.status == WJPlayerStatusPlaying) {
+            _hideBarTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerExec:) userInfo:nil repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:_hideBarTimer forMode:NSRunLoopCommonModes];
+        }
     }
 }
 

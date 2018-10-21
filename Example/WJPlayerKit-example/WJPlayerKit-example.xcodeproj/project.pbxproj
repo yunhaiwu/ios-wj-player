@@ -23,6 +23,8 @@
 		6053F0632179ADE000B828E1 /* HomePlayerBottomOperationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0622179ADE000B828E1 /* HomePlayerBottomOperationBar.m */; };
 		6053F0662179BCAE00B828E1 /* TimeStringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0652179BCAE00B828E1 /* TimeStringFormatter.m */; };
 		6053F0692179F13700B828E1 /* FullScreenPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F0682179F13700B828E1 /* FullScreenPlayerControlView.m */; };
+		6053F06F217C52AD00B828E1 /* BottomBarPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F06E217C52AD00B828E1 /* BottomBarPlayerControlView.m */; };
+		6053F072217C546D00B828E1 /* SimplePlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F071217C546D00B828E1 /* SimplePlayerControlView.m */; };
 		6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */; };
 		60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E87C216CA112002F2638 /* AppDelegate.m */; };
 		60A1E885216CA113002F2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E884216CA113002F2638 /* Assets.xcassets */; };
@@ -97,6 +99,10 @@
 		6053F0652179BCAE00B828E1 /* TimeStringFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeStringFormatter.m; sourceTree = "<group>"; };
 		6053F0672179F13700B828E1 /* FullScreenPlayerControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullScreenPlayerControlView.h; sourceTree = "<group>"; };
 		6053F0682179F13700B828E1 /* FullScreenPlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullScreenPlayerControlView.m; sourceTree = "<group>"; };
+		6053F06D217C52AD00B828E1 /* BottomBarPlayerControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomBarPlayerControlView.h; sourceTree = "<group>"; };
+		6053F06E217C52AD00B828E1 /* BottomBarPlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BottomBarPlayerControlView.m; sourceTree = "<group>"; };
+		6053F070217C546D00B828E1 /* SimplePlayerControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimplePlayerControlView.h; sourceTree = "<group>"; };
+		6053F071217C546D00B828E1 /* SimplePlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayerControlView.m; sourceTree = "<group>"; };
 		6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractAskPlayControlView.h; sourceTree = "<group>"; };
 		6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractAskPlayControlView.m; sourceTree = "<group>"; };
 		60A1E878216CA112002F2638 /* WJPlayerKit-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WJPlayerKit-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +228,10 @@
 				6053F0622179ADE000B828E1 /* HomePlayerBottomOperationBar.m */,
 				6053F0672179F13700B828E1 /* FullScreenPlayerControlView.h */,
 				6053F0682179F13700B828E1 /* FullScreenPlayerControlView.m */,
+				6053F06D217C52AD00B828E1 /* BottomBarPlayerControlView.h */,
+				6053F06E217C52AD00B828E1 /* BottomBarPlayerControlView.m */,
+				6053F070217C546D00B828E1 /* SimplePlayerControlView.h */,
+				6053F071217C546D00B828E1 /* SimplePlayerControlView.m */,
 				6053F0642179BCAE00B828E1 /* TimeStringFormatter.h */,
 				6053F0652179BCAE00B828E1 /* TimeStringFormatter.m */,
 			);
@@ -554,11 +564,13 @@
 				6053F05121786D2C00B828E1 /* PlayerSlider.m in Sources */,
 				60A1E8C7216CA1C3002F2638 /* SimplePlayerPosterView.m in Sources */,
 				60A1E8B7216CA17A002F2638 /* WJMediaCacheFactory.m in Sources */,
+				6053F06F217C52AD00B828E1 /* BottomBarPlayerControlView.m in Sources */,
 				6053F0542178727300B828E1 /* PlayerBottomOperationBar.m in Sources */,
 				6053F0632179ADE000B828E1 /* HomePlayerBottomOperationBar.m in Sources */,
 				60A1E8EB216CA33A002F2638 /* BaseViewController.m in Sources */,
 				60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */,
 				6053F03921772CC700B828E1 /* Default4GAskControlView.m in Sources */,
+				6053F072217C546D00B828E1 /* SimplePlayerControlView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

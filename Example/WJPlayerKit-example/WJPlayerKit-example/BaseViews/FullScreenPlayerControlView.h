@@ -8,7 +8,7 @@
 
 #import "BasePlayerControlView.h"
 
-typedef void (^FullScreenPlayerControlViewActionBlock)(BOOL quitFullScreen);
+typedef void (^FullScreenPlayerControlViewActionBlock)(BOOL transform);
 
 /**
  全屏播放器控制视图

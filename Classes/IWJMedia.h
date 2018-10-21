@@ -39,6 +39,11 @@ typedef NS_ENUM (NSInteger, WJMediaType) {
  */
 -(NSURL*)mediaURL;
 
+/**
+ 媒体总时长
+ */
+-(int)duration;
+
 @optional
 
 /**

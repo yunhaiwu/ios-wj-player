@@ -32,4 +32,8 @@
     return _videoUrl;
 }
 
+-(int)duration {
+    return 0;
+}
+
 @end

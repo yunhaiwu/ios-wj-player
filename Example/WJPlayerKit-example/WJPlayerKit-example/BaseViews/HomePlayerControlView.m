@@ -16,7 +16,7 @@
 
 @property(nonatomic, weak) HomePlayerBottomOperationBar *bottomBar;
 
-@property(nonatomic, weak) UILabel *labTotalDuration;
+@property(nonatomic, weak) UILabel *labTime;
 
 @property(nonatomic, weak) NSTimer *timer;
 
@@ -31,7 +31,7 @@
         WJPlayerStatus status = self.player.status;
         [self refreshPlayStatus:status];
         [self.bottomBar setPlaying:status == WJPlayerStatusPlaying];
-        [self.labTotalDuration setHidden:status != WJPlayerStatusUnknown];
+        [self.labTime setHidden:status != WJPlayerStatusUnknown];
     }]];
     
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"muted" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
@@ -40,8 +40,17 @@
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"duration" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         @strongify(self)
-        [self.bottomBar setTotalTime:self.player.duration];
-        [self.labTotalDuration setText:[TimeStringFormatter formatTime:self.player.duration]];
+        if (self.player.duration > 0) {
+            [self.bottomBar setTotalTime:self.player.duration];
+            [self.labTime setText:[TimeStringFormatter formatTime:self.player.duration]];
+        }
+    }]];
+    [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"mediaData" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+        @strongify(self)
+        if (self.player.mediaData) {
+            [self.bottomBar setTotalTime:[self.player.mediaData duration]];
+            [self.labTime setText:[TimeStringFormatter formatTime:[self.player.mediaData duration]]];
+        }
     }]];
     [disposables addObject:[[(NSObject*)self.player rac_valuesAndChangesForKeyPath:@"currentPlayTime" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         @strongify(self)
@@ -98,7 +107,7 @@
         [lab setTextColor:[UIColor whiteColor]];
         [lab setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
         [self addSubview:lab];
-        _labTotalDuration = lab;
+        _labTime = lab;
         [lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(16);
             make.width.mas_greaterThanOrEqualTo(20);
