@@ -65,6 +65,11 @@
 @property(nonatomic, weak) UIView *topOperationBar,*bottomOperationBar;
 
 /**
+ 滑块
+ */
+@property(nonatomic, weak) UISlider *slider;
+
+/**
  添加观察者
  */
 -(void)addPlayerObserver:(NSHashTable<RACDisposable*>*)disposables;

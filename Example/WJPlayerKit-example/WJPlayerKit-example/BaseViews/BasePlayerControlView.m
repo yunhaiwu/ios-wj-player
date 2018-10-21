@@ -13,7 +13,9 @@
 
 @interface BasePlayerControlView ()<UIGestureRecognizerDelegate>
 
-@property(nonatomic, strong) NSHashTable<RACDisposable *> *disposables;
+@property(nonatomic, strong) NSHashTable<RACDisposable *> *playerDisposables;
+
+@property(nonatomic, strong) NSHashTable<RACDisposable *> *sliderDisposables;
 
 //loading 视图
 @property(nonatomic, weak) PlayerLoadingView *loadingView;
@@ -190,21 +192,66 @@
 }
 
 -(void)removePlayerObserver {
-    NSArray *objects = [_disposables allObjects];
+    NSArray *objects = [_playerDisposables allObjects];
     if ([objects count] > 0) {
         [objects makeObjectsPerformSelector:@selector(dispose)];
-        [_disposables removeAllObjects];
+        [_playerDisposables removeAllObjects];
+    }
+}
+
+-(void)removeSliderEventsHandler {
+    NSArray *objects = [_sliderDisposables allObjects];
+    if ([objects count] > 0) {
+        [objects makeObjectsPerformSelector:@selector(dispose)];
+        [_sliderDisposables removeAllObjects];
     }
 }
 
 -(void)addPlayerObserver:(NSHashTable<RACDisposable *> *)disposables {}
 
 
+-(void)addSliderEventsHandler:(NSHashTable<RACDisposable *> *)disposables {
+    @weakify(self)
+    [[_slider rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        @strongify(self)
+        [self cancelHideBarTimer];
+        PlayerGestureData *data = [PlayerGestureData getCacheGestureData];
+        [data reset];
+        [data setFuncType:PanGestureFuncTypeProgress];
+        [data setTotalDuration:self.player.duration];
+        [data setBeginTime:self.player.currentPlayTime];
+        [data setCurrentTime:self.player.duration*self.slider.value];
+        [self.stateIndicatorView refreshGestureData:data];
+    }];
+    
+    [[_slider rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        @strongify(self)
+        [[PlayerGestureData getCacheGestureData] setCurrentTime:self.player.duration*self.slider.value];
+        [self.stateIndicatorView refreshGestureData:[PlayerGestureData getCacheGestureData]];
+    }];
+    
+    [[_slider rac_signalForControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside|UIControlEventTouchCancel] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        @strongify(self)
+        [[PlayerGestureData getCacheGestureData] reset];
+        [self.stateIndicatorView refreshGestureData:[PlayerGestureData getCacheGestureData]];
+        int t = self.player.duration*self.slider.value;
+        [self.player seekToTime:t];
+        [self startHideBarTimer];
+    }];
+}
+
 -(void)setPlayer:(id<IWJPlayer>)player {
     if (_player == player) return;
     [self removePlayerObserver];
     _player = player;
-    if (_player) [self addPlayerObserver:_disposables];
+    if (_player) [self addPlayerObserver:_playerDisposables];
+}
+
+-(void)setSlider:(UISlider *)slider {
+    if (_slider == slider) return;
+    [self removeSliderEventsHandler];
+    _slider = slider;
+    if (_slider) [self addSliderEventsHandler:_sliderDisposables];
 }
 
 -(PlayerStateIndicatorView *)stateIndicatorView {
@@ -232,7 +279,12 @@
 
 
 -(void)performInitialize {
-    if (!_disposables) self.disposables = [[NSHashTable alloc] initWithOptions:NSPointerFunctionsWeakMemory capacity:0];
+    if (!_playerDisposables) {
+        self.playerDisposables = [[NSHashTable alloc] initWithOptions:NSPointerFunctionsWeakMemory capacity:0];
+    }
+    if (!_slider) {
+        self.sliderDisposables = [[NSHashTable alloc] initWithOptions:NSPointerFunctionsWeakMemory capacity:0];
+    }
     if (!_loadingView) {
         PlayerLoadingView *v = [[PlayerLoadingView alloc] init];
         [self addSubview:v];
@@ -334,14 +386,10 @@
                     self.panGesture = pan;
                     self.panGestureHandler = [[PlayerPanGestureHandler alloc] init];
                     @weakify(self)
-                    
-//                    [self.panGestureHandler setCallbackBlock:^(StateIndicatorType type, BOOL seek, int timeValue, BOOL brightness, float brightnessValue, BOOL progress, int progressValue) {
-//                        @strongify(self)
-//                        [self.stateIndicatorView setType:type];
-//                        if (seek) [self.player seekToTime:timeValue];
-//                        if (brightness) [self.stateIndicatorView setBrightness:brightnessValue];
-//                        if (progress) [self.stateIndicatorView setCurrentTime:progressValue];
-//                    }];
+                    [self.panGestureHandler setCallbackBlock:^(PlayerGestureData *gesture, BOOL isEnd) {
+                        @strongify(self)
+                        [self.stateIndicatorView refreshGestureData:gesture];
+                    }];
                 }
             } else {
                 if (self.panGesture) {

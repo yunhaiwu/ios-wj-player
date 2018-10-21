@@ -43,25 +43,7 @@
             if (transform) if (NULL != self.copyActionBlock) self.copyActionBlock(YES);
         }];
         
-        [[[bottomBar slider] rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            @strongify(self)
-            [self.stateIndicatorView setCurrentTime:self.player.duration*self.bottomBar.slider.value];
-        }];
-        [[[bottomBar slider] rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            @strongify(self)
-            [self cancelHideBarTimer];
-            [self.stateIndicatorView setType:StateIndicatorTypeProgress];
-            [self.stateIndicatorView setTotalDuration:self.player.duration];
-            [self.stateIndicatorView setBeginTime:self.player.currentPlayTime];
-            [self.stateIndicatorView setCurrentTime:self.player.duration*self.bottomBar.slider.value];
-        }];
-        [[[bottomBar slider] rac_signalForControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside|UIControlEventTouchCancel] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            @strongify(self)
-            [self.stateIndicatorView setType:StateIndicatorTypeNone];
-            int t = self.player.duration*self.bottomBar.slider.value;
-            [self.player seekToTime:t];
-            [self startHideBarTimer];
-        }];
+        self.slider = [bottomBar slider];
         
 //        self.enablePanGesture = YES;
         self.enableDoubleTapGesture = YES;

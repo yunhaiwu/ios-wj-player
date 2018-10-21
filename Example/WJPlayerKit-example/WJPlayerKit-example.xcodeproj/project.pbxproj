@@ -26,6 +26,7 @@
 		6053F06F217C52AD00B828E1 /* BottomBarPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F06E217C52AD00B828E1 /* BottomBarPlayerControlView.m */; };
 		6053F072217C546D00B828E1 /* SimplePlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F071217C546D00B828E1 /* SimplePlayerControlView.m */; };
 		6053F075217C6D2300B828E1 /* CanFullScreenVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F074217C6D2300B828E1 /* CanFullScreenVideoPlayView.m */; };
+		6053F078217CB53200B828E1 /* PlayerGestureData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6053F077217CB53200B828E1 /* PlayerGestureData.m */; };
 		6078DB692174479C00C919A2 /* AbstractAskPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */; };
 		60A1E87D216CA112002F2638 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A1E87C216CA112002F2638 /* AppDelegate.m */; };
 		60A1E885216CA113002F2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A1E884216CA113002F2638 /* Assets.xcassets */; };
@@ -106,6 +107,8 @@
 		6053F071217C546D00B828E1 /* SimplePlayerControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayerControlView.m; sourceTree = "<group>"; };
 		6053F073217C6D2300B828E1 /* CanFullScreenVideoPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanFullScreenVideoPlayView.h; sourceTree = "<group>"; };
 		6053F074217C6D2300B828E1 /* CanFullScreenVideoPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanFullScreenVideoPlayView.m; sourceTree = "<group>"; };
+		6053F076217CB53200B828E1 /* PlayerGestureData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerGestureData.h; sourceTree = "<group>"; };
+		6053F077217CB53200B828E1 /* PlayerGestureData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerGestureData.m; sourceTree = "<group>"; };
 		6078DB672174479C00C919A2 /* AbstractAskPlayControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractAskPlayControlView.h; sourceTree = "<group>"; };
 		6078DB682174479C00C919A2 /* AbstractAskPlayControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractAskPlayControlView.m; sourceTree = "<group>"; };
 		60A1E878216CA112002F2638 /* WJPlayerKit-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WJPlayerKit-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,16 +212,18 @@
 			children = (
 				6053F03F217832CD00B828E1 /* BasePlayerControlView.h */,
 				6053F040217832CD00B828E1 /* BasePlayerControlView.m */,
+				6053F076217CB53200B828E1 /* PlayerGestureData.h */,
+				6053F077217CB53200B828E1 /* PlayerGestureData.m */,
 				6053F05B2178AE6900B828E1 /* PlayerPanGestureHandler.h */,
 				6053F05C2178AE6900B828E1 /* PlayerPanGestureHandler.m */,
+				6053F04C21785EC500B828E1 /* PlayerStateIndicatorView.h */,
+				6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */,
 				6053F042217834AB00B828E1 /* PlayerLoadingView.h */,
 				6053F043217834AB00B828E1 /* PlayerLoadingView.m */,
 				6053F04921785AE700B828E1 /* PlayerReplayView.h */,
 				6053F04A21785AE700B828E1 /* PlayerReplayView.m */,
 				6053F04F21786D2C00B828E1 /* PlayerSlider.h */,
 				6053F05021786D2C00B828E1 /* PlayerSlider.m */,
-				6053F04C21785EC500B828E1 /* PlayerStateIndicatorView.h */,
-				6053F04D21785EC500B828E1 /* PlayerStateIndicatorView.m */,
 				6053F0522178727300B828E1 /* PlayerBottomOperationBar.h */,
 				6053F0532178727300B828E1 /* PlayerBottomOperationBar.m */,
 				6053F055217875D500B828E1 /* PlayerTopOperationBar.h */,
@@ -545,6 +550,7 @@
 				6053F05D2178AE6900B828E1 /* PlayerPanGestureHandler.m in Sources */,
 				60A1E8EC216CA33A002F2638 /* BaseTableViewController.m in Sources */,
 				60A1E8E0216CA21D002F2638 /* AudioPlayViewController.m in Sources */,
+				6053F078217CB53200B828E1 /* PlayerGestureData.m in Sources */,
 				6053F0602179AD5300B828E1 /* HomePlayerControlView.m in Sources */,
 				6053F05A21788A4300B828E1 /* GaussianBlurPosterView.m in Sources */,
 				60A1E8BA216CA17A002F2638 /* SimpleAudioMedia.m in Sources */,

@@ -9,61 +9,10 @@
 #import "PlayerPanGestureHandler.h"
 
 
-@interface PlayerPanGestureData : NSObject
-@property(nonatomic, assign) StateIndicatorType type;
-@property(nonatomic, assign) CGPoint beginPoint;
-@property(nonatomic, assign) float beginBrightness;
-@property(nonatomic, assign) float currentBrightness;
-@property(nonatomic, assign) int totalDuration;
-@property(nonatomic, assign) int beginTime;
-@property(nonatomic, assign) int currentTime;
-@property(nonatomic, assign) float beginVolume;
-@property(nonatomic, assign) float currentVolume;
--(void)reset;
--(NSNumber*)getValue;
-@end
-
-@implementation PlayerPanGestureData
-
--(void)reset {
-    self.type = StateIndicatorTypeNone;
-    self.beginPoint = CGPointZero;
-    self.beginBrightness = 0.0f;
-    self.currentBrightness = 0.0f;
-    self.totalDuration = 0;
-    self.beginTime = 0;
-    self.currentTime = 0;
-    self.currentVolume = 0.0f;
-    self.beginVolume = 0.0f;
-}
-
--(NSNumber *)getValue {
-    NSNumber *value = nil;
-    switch (_type) {
-        case StateIndicatorTypeVolume:
-            value = @(_currentVolume);
-            break;
-        case StateIndicatorTypeProgress:
-            value = @(_currentTime);
-            break;
-        case StateIndicatorTypeBrightess:
-            value = @(_currentBrightness);
-            break;
-        default:
-            break;
-    }
-    return value;
-}
-
-@end
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface PlayerPanGestureHandler()
 
 @property(nonatomic, copy) PlayerPanGestureHandlerCallbackBlock copyCallbackBlock;
-@property(nonatomic, strong) PlayerPanGestureData *gestureData;
+@property(nonatomic, strong) PlayerGestureData *gestureData;
 @end
 
 @implementation PlayerPanGestureHandler
@@ -71,7 +20,7 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
-        self.gestureData = [[PlayerPanGestureData alloc] init];
+        self.gestureData = [[PlayerGestureData alloc] init];
     }
     return self;
 }
@@ -81,29 +30,38 @@
 }
 
 -(void)handleGesture:(UIPanGestureRecognizer *)gesture view:(UIView *)view player:(id<IWJPlayer>)player isFullScreen:(BOOL)isFullScreen {
+    CGPoint translationPoint = [gesture translationInView:view];
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             [self.gestureData reset];
             self.gestureData.beginPoint = [gesture locationInView:view];
-            self.copyCallbackBlock(self.gestureData.type, self.gestureData.getValue, NO);
+            self.copyCallbackBlock(self.gestureData, NO);
             break;
         case UIGestureRecognizerStateChanged:
-            
-            self.copyCallbackBlock(self.gestureData.type, self.gestureData.getValue, NO);
+        {
+            [self determinePanGestureTypeIfNeeded:translationPoint player:player isFullScreen:isFullScreen];
+            [self handleTranslationPoint:translationPoint];
+            self.copyCallbackBlock(self.gestureData, NO);
+        }
             break;
         case UIGestureRecognizerStateEnded:
-            
-            self.copyCallbackBlock(self.gestureData.type, self.gestureData.getValue, YES);
+        {
+            [self determinePanGestureTypeIfNeeded:translationPoint player:player isFullScreen:isFullScreen];
+            [self handleTranslationPoint:translationPoint];
+            self.copyCallbackBlock(self.gestureData, YES);
+            [self.gestureData reset];
+            self.copyCallbackBlock(self.gestureData, NO);
+        }
             break;
         default:
             [self.gestureData reset];
-            self.copyCallbackBlock(self.gestureData.type, self.gestureData.getValue, YES);
+            self.copyCallbackBlock(self.gestureData, YES);
             break;
     }
 }
 
 -(void)determinePanGestureTypeIfNeeded:(CGPoint)translation player:(id<IWJPlayer>)player isFullScreen:(BOOL)isFullScreen {
-    if (self.gestureData.type == StateIndicatorTypeNone) {
+    if (self.gestureData.funcType == PanGestureFuncTypeNone) {
         if (fabs(translation.x) > 10.0f) {
             BOOL horizontal = NO;
             if (translation.y == 0.0f) {
@@ -112,7 +70,7 @@
                 horizontal = (fabs(translation.x/translation.y) > 5.0f);
             }
             if (horizontal) {
-                self.gestureData.type = StateIndicatorTypeProgress;
+                self.gestureData.funcType = PanGestureFuncTypeProgress;
                 [self.gestureData setTotalDuration:[player duration]];
                 [self.gestureData setBeginTime:[player currentPlayTime]];
             }
@@ -126,10 +84,11 @@
             if (vertical) {
                 CGFloat v = isFullScreen ? ([UIScreen mainScreen].bounds.size.height / 2.0f) : ([UIScreen mainScreen].bounds.size.width / 2.0f);
                 if (self.gestureData.beginPoint.x < v) {
-                    self.gestureData.type = StateIndicatorTypeBrightess;
+                    self.gestureData.funcType = PanGestureFuncTypeBrightess;
                     self.gestureData.beginBrightness = [UIScreen mainScreen].brightness;
+                    self.gestureData.currentVolume = self.gestureData.beginBrightness;
                 } else {
-                    self.gestureData.type = StateIndicatorTypeVolume;
+                    self.gestureData.funcType = PanGestureFuncTypeVolume;
 //                    self.gestureData.beginVolume = [[self.gestureData volumeSlider] value];
                 }
             }
@@ -138,48 +97,49 @@
 }
 
 -(void)handleTranslationPoint:(CGPoint)translationPoint {
-    switch (_gestureData.type) {
-        case StateIndicatorTypeVolume:
+    switch (_gestureData.funcType) {
+        case PanGestureFuncTypeVolume:
         {
             CGFloat value = fabs(translationPoint.y) / ([UIScreen mainScreen].bounds.size.width - 100.0f);
             if (translationPoint.y > 0) {
                 if (_gestureData.beginVolume < value) {
-//                    [[_panGestureInfo volumeSlider] setValue:0.0f];
+                    _gestureData.currentVolume = 0.0f;
                 } else {
-//                    [[_panGestureInfo volumeSlider] setValue:_panGestureInfo.beginVolume-value];
+                    _gestureData.currentVolume = _gestureData.beginVolume - value;
                 }
             } else {
                 if (_gestureData.beginVolume + value > 1.0f) {
-//                    [[_panGestureInfo volumeSlider] setValue:1.0f];
+                    _gestureData.currentVolume = 1.0f;
                 } else {
-//                    [[_panGestureInfo volumeSlider] setValue:_panGestureInfo.beginVolume+value];
+                    _gestureData.currentVolume = _gestureData.beginVolume + value;
                 }
             }
+            //设置声音
+            //设置声音
+            //设置声音
 //            [_gestureData setCurrentVolume:[_panGestureInfo volumeSlider].value]
         }
             break;
-        case StateIndicatorTypeBrightess:
+        case PanGestureFuncTypeBrightess:
         {
             CGFloat value = fabs(translationPoint.y) / ([UIScreen mainScreen].bounds.size.width - 100.0f);
             if (translationPoint.y > 0) {
                 if (_gestureData.beginBrightness < value) {
-                    [_gestureData setCurrentBrightness:0.0f];
+                    _gestureData.currentBrightness = 0.0f;
                 } else {
-                    [_gestureData setCurrentBrightness:_gestureData.beginBrightness - value];
+                    _gestureData.currentBrightness = _gestureData.beginBrightness - value;
                 }
             } else {
                 if (_gestureData.beginBrightness + value > 1.0f) {
-//                    [[UIScreen mainScreen] setBrightness:1.0f];
-                    [_gestureData setCurrentBrightness:1.0f];
+                    _gestureData.currentBrightness = 1.0f;
                 } else {
-                    [_gestureData setCurrentBrightness:_gestureData.beginBrightness+value];
-//                    [[UIScreen mainScreen] setBrightness:_panGestureInfo.beginBrightness+value];
+                    _gestureData.currentBrightness = _gestureData.beginBrightness + value;
                 }
             }
-//            [_playerDragIndicatorView setBrightness:[UIScreen mainScreen].brightness];
+            [[UIScreen mainScreen] setBrightness:_gestureData.currentVolume];
         }
             break;
-        case StateIndicatorTypeProgress:
+        case PanGestureFuncTypeProgress:
         {
             int currentTime = _gestureData.beginTime + (int)translationPoint.x;
             if (currentTime < 0) {
@@ -188,14 +148,6 @@
                 currentTime = _gestureData.totalDuration;
             }
             [_gestureData setCurrentTime:currentTime];
-//            [_playerDragIndicatorView setBeginTime:_panGestureInfo.beginCurrentTime];
-//            [_playerDragIndicatorView setTotalDuration:_panGestureInfo.totalDuration];
-//            [_playerDragIndicatorView setCurrentTime:currentTime];
-//            if (ended) {
-//                //跳转操作
-//                [self.player seekToTime:CMTimeMake(currentTime, 1.0f)];
-//                [self.player play];
-//            }
         }
             break;
         default:

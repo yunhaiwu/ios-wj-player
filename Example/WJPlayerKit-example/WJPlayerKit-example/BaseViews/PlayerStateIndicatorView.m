@@ -53,27 +53,10 @@
         [label setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
         [label setTextColor:[UIColor whiteColor]];
         _indicatorLab = label;
-        @weakify(self)
-        [[self rac_valuesAndChangesForKeyPath:@"type" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-            @strongify(self)
-            [self refreshUI];
-        }];
-        [[self rac_valuesAndChangesForKeyPath:@"brightness" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-            [self refreshUI];
-        }];
-        [[self rac_valuesAndChangesForKeyPath:@"currentTime" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-            [self refreshUI];
-        }];
-        [[self rac_valuesAndChangesForKeyPath:@"beginTime" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-            [self refreshUI];
-        }];
-        [[self rac_valuesAndChangesForKeyPath:@"totalDuration" options:NSKeyValueObservingOptionNew observer:self] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-            [self refreshUI];
-        }];
     }
     [self setUserInteractionEnabled:NO];
     [self setBackgroundColor:[UIColor clearColor]];
-    [self refreshUI];
+    [self setHidden:YES];
 }
 
 -(void)layoutSubviews {
@@ -95,22 +78,29 @@
     }
 }
 
--(void)refreshUI {
-    switch (_type) {
-        case StateIndicatorTypeProgress:
+- (void)refreshGestureData:(PlayerGestureData *)gestureData {
+    PanGestureFuncType type = [gestureData funcType];
+    switch (type) {
+        case PanGestureFuncTypeProgress:
             [self setHidden:NO];
-            if (_beginTime > _currentTime) {
+            if (gestureData.beginTime > gestureData.currentTime) {
                 [_indicatorImage setImage:[UIImage imageNamed:@"player-indicator-progress-backward"]];
             } else {
                 [_indicatorImage setImage:[UIImage imageNamed:@"player-indicator-progress-forward"]];
             }
-            [_indicatorLab setText:[NSString stringWithFormat:@"%@ / %@",[self formatTimeToString:_currentTime],[self formatTimeToString:_totalDuration]]];
+            [_indicatorLab setText:[NSString stringWithFormat:@"%@ / %@",[self formatTimeToString:gestureData.currentTime],[self formatTimeToString:gestureData.totalDuration]]];
             [_indicatorLab setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
             break;
-        case StateIndicatorTypeBrightess:
+        case PanGestureFuncTypeBrightess:
             [self setHidden:NO];
             [_indicatorImage setImage:[UIImage imageNamed:@"player-indicator-brightness"]];
-            [_indicatorLab setText:[NSString stringWithFormat:@"%i%%",(int)(_brightness*100)]];
+            [_indicatorLab setText:[NSString stringWithFormat:@"%i%%",(int)(gestureData.currentBrightness*100)]];
+            [_indicatorLab setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
+            break;
+        case PanGestureFuncTypeVolume:
+            [self setHidden:NO];
+            [_indicatorImage setImage:[UIImage imageNamed:@"player-indicator-volume"]];
+            [_indicatorLab setText:[NSString stringWithFormat:@"%i%%",(int)(gestureData.currentBrightness*100)]];
             [_indicatorLab setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
             break;
         default:

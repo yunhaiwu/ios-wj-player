@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "PlayerStateIndicatorView.h"
 #import "IWJPlayer.h"
+#import "PlayerGestureData.h"
 
-typedef void (^PlayerPanGestureHandlerCallbackBlock)(StateIndicatorType type, NSNumber *value, BOOL isEnd);
+typedef void (^PlayerPanGestureHandlerCallbackBlock)(PlayerGestureData *gesture, BOOL isEnd);
 
 /**
  播放器拖拽手势处理器
  */
 @interface PlayerPanGestureHandler : NSObject
-
 
 -(void)setCallbackBlock:(PlayerPanGestureHandlerCallbackBlock)block;
 

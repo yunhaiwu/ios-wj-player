@@ -7,34 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSInteger, StateIndicatorType) {
-    
-    //无
-    StateIndicatorTypeNone,
-    
-    //播放进度
-    StateIndicatorTypeProgress,
-    
-    //亮度
-    StateIndicatorTypeBrightess,
-    
-    //声音
-    StateIndicatorTypeVolume,
-};
+#import "PlayerGestureData.h"
 
 /**
  拖拽标识视图
  */
 @interface PlayerStateIndicatorView : UIView
 
-//类型
-@property(nonatomic, assign) StateIndicatorType type;
-
-//亮度
-@property(nonatomic, assign) float brightness;
-
-//播放进度
-@property(nonatomic, assign) int currentTime,beginTime,totalDuration;
+-(void)refreshGestureData:(PlayerGestureData*)gestureData;
 
 @end

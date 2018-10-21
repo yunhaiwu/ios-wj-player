@@ -82,25 +82,7 @@
             }
         }];
         
-        [[[bar slider] rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            @strongify(self)
-            [self.stateIndicatorView setCurrentTime:self.player.duration*bar.slider.value];
-        }];
-        [[[bar slider] rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            @strongify(self)
-            [self cancelHideBarTimer];
-            [self.stateIndicatorView setType:StateIndicatorTypeProgress];
-            [self.stateIndicatorView setTotalDuration:self.player.duration];
-            [self.stateIndicatorView setBeginTime:self.player.currentPlayTime];
-            [self.stateIndicatorView setCurrentTime:self.player.duration*bar.slider.value];
-        }];
-        [[[bar slider] rac_signalForControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside|UIControlEventTouchCancel] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            @strongify(self)
-            [self.stateIndicatorView setType:StateIndicatorTypeNone];
-            int t = self.player.duration*bar.slider.value;
-            [self.player seekToTime:t];
-            [self startHideBarTimer];
-        }];
+        self.slider = [bar slider];
         
         UILabel *lab = [UILabel new];
         [lab setTextAlignment:NSTextAlignmentRight];
