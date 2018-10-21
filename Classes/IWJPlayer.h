@@ -105,4 +105,15 @@ typedef NS_ENUM(NSInteger, WJPlayerStatus) {
  */
 - (void)seekToTime:(int)time;
 
+
+/**
+ 暂停当前播放器
+ */
++ (void)pauseCurrentPlayer;
+
+/**
+ 继续播放当前播放器
+ */
++ (void)playCurrentPlayer;
+
 @end

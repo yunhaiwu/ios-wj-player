@@ -371,4 +371,15 @@ static BOOL cellNetworkShouldPlay;
     return CGSizeZero;
 }
 
+
++ (void)pauseCurrentPlayer {
+    id<IWJPlayer> currentPlayer = WJ_PLAYER_CONTEXT_CURRENT_PLAYER_GET;
+    if (currentPlayer) [currentPlayer pause];
+}
+
++ (void)playCurrentPlayer {
+    id<IWJPlayer> currentPlayer = WJ_PLAYER_CONTEXT_CURRENT_PLAYER_GET;
+    if (currentPlayer) [currentPlayer play];
+}
+
 @end
