@@ -116,14 +116,13 @@ static NSDictionary *playerItemObserveOptions;
         int startSeconds = CMTimeGetSeconds(timeRange.start);
         int durationSeconds = CMTimeGetSeconds(timeRange.duration);
         [self changeLoadedTime:startSeconds + durationSeconds];
-    }
-//    else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
-        //缓存开始
-//        [self changeStatus:WJPlayerStatusLoading];
-//    } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
-//        //缓存完成
-//    }
-    else if ([keyPath isEqualToString:@"muted"]) {
+    } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
+        [self changeStatus:WJPlayerStatusLoading];
+    } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
+        if (self.status == WJPlayerStatusLoading) {
+            [self changeStatus:WJPlayerStatusPlaying];
+        }
+    } else if ([keyPath isEqualToString:@"muted"]) {
         [self changeMuted:self.player.muted];
     } else {
         if (@available(iOS 10.0, *)) {

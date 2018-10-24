@@ -18,22 +18,22 @@ typedef NS_ENUM(NSInteger, WJPlayerStatus) {
     WJPlayerStatusUnknown = 0,
     
     //加载中
-    WJPlayerStatusLoading,
+    WJPlayerStatusLoading = 1,
     
     //待播放
-    WJPlayerStatusReadyToPlay,
+    WJPlayerStatusReadyToPlay = 2,
     
     //暂停
-    WJPlayerStatusPaused,
+    WJPlayerStatusPaused = 3,
     
     //播放
-    WJPlayerStatusPlaying,
+    WJPlayerStatusPlaying = 4,
     
     //失败
-    WJPlayerStatusFailed,
+    WJPlayerStatusFailed = 5,
     
     //播放完成
-    WJPlayerStatusCompleted,
+    WJPlayerStatusCompleted = 6
 };
 
 
