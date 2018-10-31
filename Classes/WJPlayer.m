@@ -318,6 +318,10 @@ static BOOL cellNetworkShouldPlay;
         return;
     }
     
+    if (self.status == WJPlayerStatusUnknown) {
+        [self changeStatus:WJPlayerStatusLoading];
+    }
+    
     WJ_PLAYER_CONTEXT_CURRENT_PLAYER_SET(self);
     if (self.player) {
         if (self.status == WJPlayerStatusReadyToPlay || self.status == WJPlayerStatusPaused) {
