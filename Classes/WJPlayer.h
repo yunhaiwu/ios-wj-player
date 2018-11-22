@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "IWJPlayer.h"
 
+#define     WJPlayerCellNetworkShouldPlayNotification       @"WJPlayerCellNetworkShouldPlayNotification"
+
 @class WJPlayer;
 
 @protocol WJPlayerDelegate <NSObject>
 
 -(void)playerDidAskCellNetworkCanPlay:(WJPlayer*)player;
+-(void)playerDidNetworkChangeWiFi:(WJPlayer*)player;
 
 @end
 

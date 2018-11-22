@@ -30,4 +30,6 @@
 
 + (instancetype)sharedInstance;
 
+-(void)pauseCurrentPlayer;
+
 @end

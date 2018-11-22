@@ -10,6 +10,7 @@
 #import "WJPlayer.h"
 #import "AbstractAskPlayControlView.h"
 #import "WJConfig.h"
+#import "WJPlayerContext.h"
 
 @interface WJPlayerView()<WJPlayerDelegate, AskPlayControlViewDelegate>
 
@@ -55,6 +56,15 @@
     }
 }
 
+- (void)playerDidNetworkChangeWiFi:(WJPlayer *)player {
+    if (_askControlView) {
+        [self replaceControlView:_currentControlView];
+        if ([self player] == WJ_PLAYER_CONTEXT_CURRENT_PLAYER_GET) {
+            [self play];
+        }
+    }
+}
+
 -(AbstractAskPlayControlView*)instanceAskPlayControlView {
     NSDictionary *dict = [WJConfig dictionaryForKey:@"WJPlayerKit"];
     NSString *askPlayControlViewClazzName = dict[@"askPlayControlView"];
@@ -89,8 +99,19 @@
         [player setDelegate:self];
         _player = player;
         [_controlView setPlayer:_player];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlerPlayerCellNetworkShouldPlayNotification:) name:WJPlayerCellNetworkShouldPlayNotification object:nil];
     }
     [self setBackgroundColor:[UIColor blackColor]];
+}
+
+-(void)handlerPlayerCellNetworkShouldPlayNotification:(NSNotification*)notification {
+    if (self.askControlView && _currentControlView) {
+        [self replaceControlView:self.currentControlView];
+    }
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(instancetype)initWithControlView:(UIView<IWJPlayerControlView> *)controlView {

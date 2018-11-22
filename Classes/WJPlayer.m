@@ -23,6 +23,8 @@
 
 @property(nonatomic, strong) id timeObserver;
 
+@property(nonatomic, assign) BOOL hasInitFlag;
+
 @end
 
 @implementation WJPlayer
@@ -45,10 +47,18 @@ static NSDictionary *playerItemObserveOptions;
                                  };
 }
 
+-(void)loadSubviews {
+    if (!_hasInitFlag) {
+        _hasInitFlag = YES;
+        [self setBackgroundColor:[UIColor clearColor]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReachabilityChangedNotification:) name:kReachabilityChangedNotification object:nil];
+    }
+}
+
 -(instancetype)init {
     self = [super init];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self loadSubviews];
     }
     return self;
 }
@@ -56,7 +66,7 @@ static NSDictionary *playerItemObserveOptions;
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self loadSubviews];
     }
     return self;
 }
@@ -64,13 +74,14 @@ static NSDictionary *playerItemObserveOptions;
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self loadSubviews];
     }
     return self;
 }
 
 -(void)dealloc {
     [self cleanPlayer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)layoutSubviews {
@@ -156,7 +167,8 @@ static NSDictionary *playerItemObserveOptions;
     [playerItemObserveOptions enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [self.playerItem removeObserver:self forKeyPath:key];
     }];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    
     if (_timeObserver) [_player removeTimeObserver:_timeObserver];
 }
 
@@ -180,16 +192,19 @@ static NSDictionary *playerItemObserveOptions;
         }
         if (!CMTIME_IS_INDEFINITE(weakSelf.player.currentItem.asset.duration)) {
             [weakSelf changeCurrentPlayTime:seconds];
-            WJ_PLAYER_CONTEXT_TIME_SET(weakSelf.mediaData.mediaURL.absoluteString, seconds);
+            if (seconds > 0) {
+                //解决iOS11+还没播放即调用bug
+                WJ_PLAYER_CONTEXT_TIME_SET(weakSelf.mediaData.mediaURL.absoluteString, seconds);
+            }
         }
     }];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReachabilityChangedNotification:) name:kReachabilityChangedNotification object:nil];
 }
 
 static BOOL cellNetworkShouldPlay;
 
 - (void)cellNetworkCanPlay {
     cellNetworkShouldPlay = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:WJPlayerCellNetworkShouldPlayNotification object:nil];
 }
 
 -(void)handleReachabilityChangedNotification:(NSNotification*)notification {
@@ -204,7 +219,7 @@ static BOOL cellNetworkShouldPlay;
             }
             break;
         case ReachableViaWiFi:
-//            if (self.status == WJPlayerStatusPaused) [self play];
+            [self.delegate playerDidNetworkChangeWiFi:self];
             break;
         default:
             break;
@@ -266,7 +281,6 @@ static BOOL cellNetworkShouldPlay;
     self.timeObserver = nil;
     [self changeLoadedTime:0];
     [self changeCurrentPlayTime:0];
-    [self changeDuration:0];
     [self changeStatus:WJPlayerStatusUnknown];
 }
 
@@ -275,6 +289,7 @@ static BOOL cellNetworkShouldPlay;
     WJLogDebug(@"\n load player:%@",url.absoluteString);
     self.playerItem = [[WJMediaCacheFactory getMediaCache] getPlayerItem:url];
     self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
+    [self.player setMuted:_muted];
     //视频媒体需要添加到当前视图层上
     if ([_mediaData mediaType] == WJMediaTypeVideo) {
         AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
@@ -298,9 +313,14 @@ static BOOL cellNetworkShouldPlay;
     if (_mediaData && [_mediaData.mediaURL.absoluteString isEqualToString:media.mediaURL.absoluteString]) return;
     WJLogDebug(@"\n set media :%@",media.mediaURL.absoluteString);
     [self cleanPlayer];
+    [self changeDuration:0];
     [self willChangeValueForKey:@"mediaData"];
     _mediaData = media;
     [self didChangeValueForKey:@"mediaData"];
+    
+    if ([_mediaData mediaDuration] > 0) {
+        [self changeDuration:[_mediaData mediaDuration]];
+    }
 }
 
 -(void)play {
@@ -308,9 +328,14 @@ static BOOL cellNetworkShouldPlay;
     WJLogDebug(@"\n play :%@",_mediaData.mediaURL.absoluteString);
     //清理播放器
     WJPlayer *previousPlayer = (WJPlayer*)WJ_PLAYER_CONTEXT_CURRENT_PLAYER_GET;
-    if (previousPlayer != self) {
+    if (previousPlayer != self || self.status == WJPlayerStatusFailed) {
+        if (self.status == WJPlayerStatusFailed) {
+            [[WJMediaCacheFactory getMediaCache] cleanCacheWithURL:_mediaData.mediaURL];
+        }
         [previousPlayer cleanPlayer];
     }
+    
+    WJ_PLAYER_CONTEXT_CURRENT_PLAYER_SET(self);
     
     //询问4G情况下是否播放
     if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWWAN && !cellNetworkShouldPlay) {
@@ -322,7 +347,6 @@ static BOOL cellNetworkShouldPlay;
         [self changeStatus:WJPlayerStatusLoading];
     }
     
-    WJ_PLAYER_CONTEXT_CURRENT_PLAYER_SET(self);
     if (self.player) {
         if (self.status == WJPlayerStatusReadyToPlay || self.status == WJPlayerStatusPaused) {
             if (_currentPlayTime != WJ_PLAYER_CONTEXT_TIME_GET(_mediaData.mediaURL.absoluteString)) {
@@ -363,6 +387,9 @@ static BOOL cellNetworkShouldPlay;
         WJ_PLAYER_CONTEXT_TIME_SET(_mediaData.mediaURL.absoluteString, t);
         CMTime time = CMTimeMake(t, 1);
         if (isnan(CMTimeGetSeconds(time))) time = kCMTimeZero;
+        if (_status == WJPlayerStatusPlaying) {
+            [self changeStatus:WJPlayerStatusLoading];
+        }
         [self.player seekToTime:time toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }
 }
