@@ -13,6 +13,8 @@
 #import "WJLoggingAPI.h"
 #import "Reachability.h"
 
+NSString * const WJPlayerStatusChangeNotification = @"WJPlayerStatusChangeNotification";
+
 @interface WJPlayer()
 
 @property(nonatomic, strong) AVPlayer *player;
@@ -251,6 +253,12 @@ static BOOL cellNetworkShouldPlay;
     [self willChangeValueForKey:@"status"];
     _status = status;
     [self didChangeValueForKey:@"status"];
+    if ([_mediaData mediaURL]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:WJPlayerStatusChangeNotification object:self userInfo:@{
+                                                                                                                           @"mediaUrl":_mediaData.mediaURL.absoluteString,
+                                                                                                                           @"playerStatus":@(status)
+                                                                                                                           }];
+    }
 }
 
 -(void)changeDuration:(int)duration {

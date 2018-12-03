@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "IWJMedia.h"
 
+
+extern NSString * const WJPlayerStatusChangeNotification;
+
+
 /**
  播放器状态
  */
@@ -35,9 +39,6 @@ typedef NS_ENUM(NSInteger, WJPlayerStatus) {
     //播放完成
     WJPlayerStatusCompleted = 6
 };
-
-
-
 
 /**
  播放器
