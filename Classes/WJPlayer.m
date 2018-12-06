@@ -228,6 +228,11 @@ static BOOL cellNetworkShouldPlay;
     }
 }
 
+- (void)pauseBackgroundSoundWithError:(NSError **)error {
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:error];
+    [[AVAudioSession sharedInstance] setActive:YES error:error];
+}
+
 -(void)setMuted:(BOOL)muted {
     if (_muted == muted) return;
     [self willChangeValueForKey:@"muted"];
@@ -236,6 +241,7 @@ static BOOL cellNetworkShouldPlay;
     if (self.player) [self.player setMuted:_muted];
 }
 -(void)changeMuted:(BOOL)muted {
+    if (!muted) [self pauseBackgroundSoundWithError:NULL];
     if (_muted == muted) return;
     [self willChangeValueForKey:@"muted"];
     _muted = muted;

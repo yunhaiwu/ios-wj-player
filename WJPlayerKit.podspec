@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "WJPlayerKit"
-s.version      = "1.0.7"
+s.version      = "1.0.8"
 s.summary      = "播放器开发包."
 
 s.description  = <<-DESC
